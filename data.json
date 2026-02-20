@@ -1,11 +1,17 @@
 {
-  "updated_at": "2026-02-20T03:31:20.137127+00:00",
-  "updated_kst": "2026-02-20 12:31 KST",
+  "updated_at": "2026-02-20T04:53:09.501339+00:00",
+  "updated_kst": "2026-02-20 13:53 KST",
   "summary": [],
   "market_strength": "",
   "sectors": [],
   "stocks": [],
   "news": [
+    {
+      "time": "13:44",
+      "headline": "2026-02-20 핵심 뉴스 요약",
+      "summary": "수집된 뉴스가 없습니다.",
+      "tag": ""
+    },
     {
       "time": "19:12",
       "headline": "2026-02-19 핵심 뉴스 요약",
@@ -16,15 +22,15 @@
   "recommendations": [],
   "indices": {
     "kospi": {
-      "price": 5759.0,
-      "change": 252.0,
-      "pct": 4.58,
+      "price": 5795.0,
+      "change": 288.0,
+      "pct": 5.24,
       "pos": true
     },
     "kosdaq": {
       "price": 1156.0,
       "change": 50.0,
-      "pct": 4.55,
+      "pct": 4.48,
       "pos": true
     },
     "sp500": {
@@ -40,9 +46,9 @@
       "pos": true
     },
     "usdkrw": {
-      "price": 1449.2,
-      "change": 9.0,
-      "pct": 0.63,
+      "price": 1448.8,
+      "change": 8.6,
+      "pct": 0.6,
       "pos": true
     },
     "us10y": {
@@ -52,15 +58,15 @@
       "pos": false
     },
     "wti": {
-      "price": 66.59,
-      "change": 1.4,
-      "pct": 2.15,
+      "price": 66.69,
+      "change": 1.5,
+      "pct": 2.3,
       "pos": true
     },
     "gold": {
-      "price": 5016.0,
-      "change": 29.0,
-      "pct": 0.59,
+      "price": 5018.0,
+      "change": 31.0,
+      "pct": 0.62,
       "pos": true
     }
   }
