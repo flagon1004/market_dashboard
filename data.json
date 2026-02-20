@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-02-20T12:14:05.061329+00:00",
-  "updated_kst": "2026-02-20 21:14 KST",
+  "updated_at": "2026-02-20T12:23:55.056702+00:00",
+  "updated_kst": "2026-02-20 21:23 KST",
   "summary": [],
   "market_strength": "",
   "sectors": [],
@@ -64,9 +64,9 @@
       "pos": true
     },
     "usdkrw": {
-      "price": 1448.7,
-      "change": 8.5,
-      "pct": 0.59,
+      "price": 1448.5,
+      "change": 8.3,
+      "pct": 0.58,
       "pos": true
     },
     "us10y": {
@@ -76,9 +76,9 @@
       "pos": false
     },
     "wti": {
-      "price": 66.03,
-      "change": -0.4,
-      "pct": -0.6,
+      "price": 66.18,
+      "change": -0.25,
+      "pct": -0.38,
       "pos": false
     },
     "gold": {
