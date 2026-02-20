@@ -157,7 +157,17 @@ def query_latest(db_id, limit=10):
 def parse_db1(db_id, today_str):
     # DB1: Daily Market Log
     # 컬럼: 날짜(title) / 시장 강도(select) / AI 3줄 요약(rich_text)
-    rows = query_by_date(db_id, "날짜", today_str)
+    # 날짜 컬럼 형식: "2026-02-20 시황" (날짜+텍스트) → contains 필터 사용
+    body = {
+        "filter": {"property": "날짜", "title": {"contains": today_str}},
+        "page_size": 10,
+    }
+    try:
+        rows = n_post(f"/databases/{db_id}/query", body).get("results", [])
+    except Exception as e:
+        print(f"  [DB1] ❌ 조회 실패: {e}")
+        return {"summary": [], "market_strength": ""}
+
     if not rows:
         print(f"  [DB1] ⚠ 오늘({today_str}) 행 없음 → 노션에 오늘 날짜 행을 추가하세요")
         return {"summary": [], "market_strength": ""}
@@ -191,8 +201,17 @@ def parse_pipe(text):
 def parse_db2(db_id, today_str):
     # DB2: 주도 종목 분석
     # 컬럼: 종목명(title) / 주도 섹터(rich_text) / 특이 종목(rich_text)
-    # ※ Title 컬럼(종목명)에 오늘 날짜를 입력해서 행을 구분
-    rows = query_by_date(db_id, "종목명", today_str)
+    # 종목명 컬럼 형식: "2026-02-20 주도주 분석" (날짜+텍스트) → contains 필터 사용
+    body = {
+        "filter": {"property": "종목명", "title": {"contains": today_str}},
+        "page_size": 10,
+    }
+    try:
+        rows = n_post(f"/databases/{db_id}/query", body).get("results", [])
+    except Exception as e:
+        print(f"  [DB2] ❌ 조회 실패: {e}")
+        return {"sectors": [], "stocks": []}
+
     if not rows:
         print(f"  [DB2] ⚠ 오늘({today_str}) 행 없음 → 종목명 컬럼에 오늘 날짜를 입력하세요")
         return {"sectors": [], "stocks": []}
