@@ -1,134 +1,30 @@
 {
-  "updated_at": "2026-02-20T03:21:38.059920+00:00",
-  "updated_kst": "2026-02-20 12:21 KST",
-  "summary": [
-    "미 연준 금리 동결 시사에 코스피·나스닥 동반 상승. 외국인 순매수 전환이 지수 방어에 기여했다.",
-    "AI 반도체 섹터 급등. 엔비디아 실적 서프라이즈로 SK하이닉스·삼성전자 HBM 관련주 강세.",
-    "원/달러 환율 1,310원대 안정. 수출주 밸류에이션 개선 기대감이 코스피 안착을 이끌었다."
-  ],
-  "market_strength": "강세",
-  "sectors": [
-    {
-      "name": "반도체",
-      "change": "+3.42%",
-      "value": 3.42
-    },
-    {
-      "name": "AI·소프트웨어",
-      "change": "+2.81%",
-      "value": 2.81
-    },
-    {
-      "name": "2차전지",
-      "change": "+2.20%",
-      "value": 2.2
-    },
-    {
-      "name": "바이오",
-      "change": "+1.58%",
-      "value": 1.58
-    },
-    {
-      "name": "금융",
-      "change": "-0.84%",
-      "value": -0.84
-    },
-    {
-      "name": "건설·부동산",
-      "change": "-1.43%",
-      "value": -1.43
-    }
-  ],
-  "stocks": [
-    {
-      "name": "SK하이닉스",
-      "reason": "HBM3E 양산 확대",
-      "price": "185,400",
-      "change": "+5.23%",
-      "pos": true
-    },
-    {
-      "name": "한미반도체",
-      "reason": "TC본더 수주 체결",
-      "price": "94,800",
-      "change": "+8.71%",
-      "pos": true
-    },
-    {
-      "name": "삼성SDI",
-      "reason": "유럽 수요 둔화",
-      "price": "312,000",
-      "change": "-3.12%",
-      "pos": false
-    },
-    {
-      "name": "카카오페이",
-      "reason": "해외결제 서비스 확대",
-      "price": "24,650",
-      "change": "+4.46%",
-      "pos": true
-    }
-  ],
+  "updated_at": "2026-02-20T03:30:31.491188+00:00",
+  "updated_kst": "2026-02-20 12:30 KST",
+  "summary": [],
+  "market_strength": "",
+  "sectors": [],
+  "stocks": [],
   "news": [
     {
-      "time": "09:02",
-      "headline": "연준 1월 의사록 — 금리인하 서두를 필요 없다 기조 재확인",
-      "summary": "",
-      "tag": "통화정책"
-    },
-    {
-      "time": "10:15",
-      "headline": "엔비디아 블랙웰 GPU 공급난 — 국내 HBM 기업 반사이익 기대",
-      "summary": "",
-      "tag": "반도체"
-    },
-    {
-      "time": "11:33",
-      "headline": "정부 밸류업 2차 프로그램 발표 — 자사주 소각 의무화 논의",
-      "summary": "",
-      "tag": "정책"
-    },
-    {
-      "time": "13:47",
-      "headline": "BYD 국내 출시 재연기 — 국산 완성차·배터리주 단기 수혜",
-      "summary": "",
-      "tag": "자동차"
+      "time": "19:12",
+      "headline": "2026-02-19 핵심 뉴스 요약",
+      "summary": "수집된 뉴스가 없습니다.",
+      "tag": ""
     }
   ],
-  "recommendations": [
-    {
-      "name": "삼성전자",
-      "grade": "A+",
-      "timeframe": "중기",
-      "reason": "HBM 전환 가속 및 파운드리 수주 회복 사이클 진입. 저점 분할매수 구간.",
-      "featured": true
-    },
-    {
-      "name": "SK하이닉스",
-      "grade": "A",
-      "timeframe": "단기",
-      "reason": "HBM3E 독점 공급 지위 유지. 고수익성 구조 지속.",
-      "featured": false
-    },
-    {
-      "name": "NAVER",
-      "grade": "B+",
-      "timeframe": "장기",
-      "reason": "HyperCLOVA X B2B 전환 가속. AI 수익화 초입 구간.",
-      "featured": false
-    }
-  ],
+  "recommendations": [],
   "indices": {
     "kospi": {
       "price": 5759.0,
       "change": 252.0,
-      "pct": 4.57,
+      "pct": 4.58,
       "pos": true
     },
     "kosdaq": {
       "price": 1156.0,
       "change": 50.0,
-      "pct": 4.53,
+      "pct": 4.56,
       "pos": true
     },
     "sp500": {
@@ -144,9 +40,9 @@
       "pos": true
     },
     "usdkrw": {
-      "price": 1449.5,
-      "change": 9.4,
-      "pct": 0.65,
+      "price": 1449.4,
+      "change": 9.2,
+      "pct": 0.64,
       "pos": true
     },
     "us10y": {
@@ -156,15 +52,15 @@
       "pos": false
     },
     "wti": {
-      "price": 66.57,
-      "change": 1.38,
-      "pct": 2.12,
+      "price": 66.56,
+      "change": 1.37,
+      "pct": 2.1,
       "pos": true
     },
     "gold": {
-      "price": 5012.0,
-      "change": 26.0,
-      "pct": 0.52,
+      "price": 5016.0,
+      "change": 30.0,
+      "pct": 0.6,
       "pos": true
     }
   }
