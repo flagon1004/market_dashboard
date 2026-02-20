@@ -14,9 +14,9 @@
     주도 섹터   : rich_text     "반도체 | +3.42%\nAI | +2.81%\n..."
     특이 종목   : rich_text     "SK하이닉스 | HBM 뉴스 | 185,400 | +5.23%\n..."
 
-  [DB 3] 핵심 뉴스 아카이브     ← 뉴스 1건 = 1행, 날짜 필터 없이 최신 10건 자동 수집
-    뉴스 제목   : title         헤드라인 텍스트
-    AI 뉴스 요약: rich_text     한 줄 요약
+  [DB 3] 핵심 뉴스 아카이브     ← 날짜별 1행
+    뉴스 제목   : title         "2026-02-20 핵심 뉴스 요약"  ← 날짜 contains 필터
+    AI 뉴스 요약: rich_text     여러 뉴스를 줄바꿈(\n)으로 구분
 
   [DB 4] 추천종목               ← 하루 3~5행, 종목 1개 = 1행
     날짜        : title         "2026-02-20"  ← Title 컬럼, 날짜 필터 기준
@@ -243,27 +243,50 @@ def created_to_kst(iso_str):
 
 def parse_db3(db_id, today_str):
     # DB3: 핵심 뉴스 아카이브
-    # 컬럼: 뉴스 제목(title) / AI 뉴스 요약(rich_text)
-    # ※ 날짜 컬럼 없음 → 최신 생성순 10건 자동 수집
+    # 실제 구조: 날짜별 1행
+    #   뉴스 제목(title)    : "2026-02-20 핵심 뉴스 요약"  ← 날짜 필터 기준
+    #   AI 뉴스 요약(text)  : "뉴스1
+뉴스2
+뉴스3..."     ← 줄바꿈으로 구분
+
+    # 오늘 날짜가 포함된 title 행 검색
+    # title이 정확히 오늘 날짜와 일치하지 않으므로 contains 방식 사용
+    body = {
+        "filter": {
+            "property": "뉴스 제목",
+            "title": {"contains": today_str}
+        },
+        "page_size": 10,
+    }
     rows = []
     try:
-        rows = query_latest(db_id, limit=10)
-        print(f"  [DB3] 최신 {len(rows)}건 조회")
+        data = n_post(f"/databases/{db_id}/query", body)
+        rows = data.get("results", [])
+        print(f"  [DB3] 날짜 필터({today_str}) → {len(rows)}행 조회")
     except Exception as e:
         print(f"  [DB3] ❌ 뉴스 조회 실패: {e}")
         return {"news": []}
 
-    news = []
-    for row in rows:
-        headline = get_prop(row, "뉴스 제목", "title")
-        summary  = get_prop(row, "AI 뉴스 요약", "rich_text")
-        time_str = created_to_kst(row.get("created_time", ""))
+    if not rows:
+        print(f"  [DB3] ⚠ 오늘({today_str}) 행 없음")
+        return {"news": []}
 
-        if headline:
+    row     = rows[0]
+    raw     = get_prop(row, "AI 뉴스 요약", "rich_text").strip()
+
+    if not raw:
+        print(f"  [DB3] ⚠ AI 뉴스 요약 내용 없음")
+        return {"news": []}
+
+    # 줄바꿈으로 개별 뉴스 분리, 번호/기호 제거
+    news = []
+    for line in raw.replace("\r", "").split("\n"):
+        line = line.strip().lstrip("0123456789.-•·) ")
+        if line:
             news.append({
-                "time"    : time_str,
-                "headline": headline,
-                "summary" : summary,
+                "time"    : "",       # 시간 정보 없음
+                "headline": line,
+                "summary" : "",
                 "tag"     : "",
             })
 
@@ -503,9 +526,6 @@ def main():
     print(f"\n✅ data.json 저장 완료")
     print(f"   {out_path}")
     print(DIV)
-
-if __name__ == "__main__":
-    main()
 
 if __name__ == "__main__":
     main()
