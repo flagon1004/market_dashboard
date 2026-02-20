@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-02-20T04:53:09.501339+00:00",
-  "updated_kst": "2026-02-20 13:53 KST",
+  "updated_at": "2026-02-20T05:15:35.644085+00:00",
+  "updated_kst": "2026-02-20 14:15 KST",
   "summary": [],
   "market_strength": "",
   "sectors": [],
@@ -22,15 +22,15 @@
   "recommendations": [],
   "indices": {
     "kospi": {
-      "price": 5795.0,
-      "change": 288.0,
-      "pct": 5.24,
+      "price": 5801.0,
+      "change": 294.0,
+      "pct": 5.33,
       "pos": true
     },
     "kosdaq": {
-      "price": 1156.0,
-      "change": 50.0,
-      "pct": 4.48,
+      "price": 1154.0,
+      "change": 47.0,
+      "pct": 4.29,
       "pos": true
     },
     "sp500": {
@@ -46,9 +46,9 @@
       "pos": true
     },
     "usdkrw": {
-      "price": 1448.8,
-      "change": 8.6,
-      "pct": 0.6,
+      "price": 1448.3,
+      "change": 8.1,
+      "pct": 0.56,
       "pos": true
     },
     "us10y": {
@@ -58,15 +58,15 @@
       "pos": false
     },
     "wti": {
-      "price": 66.69,
-      "change": 1.5,
-      "pct": 2.3,
+      "price": 66.76,
+      "change": 0.33,
+      "pct": 0.5,
       "pos": true
     },
     "gold": {
-      "price": 5018.0,
-      "change": 31.0,
-      "pct": 0.62,
+      "price": 5023.0,
+      "change": 47.0,
+      "pct": 0.95,
       "pos": true
     }
   }
