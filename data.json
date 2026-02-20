@@ -1,8 +1,12 @@
 {
-  "updated_at": "2026-02-20T14:12:08.396626+00:00",
-  "updated_kst": "2026-02-20 23:12 KST",
-  "summary": [],
-  "market_strength": "",
+  "updated_at": "2026-02-20T14:31:32.569100+00:00",
+  "updated_kst": "2026-02-20 23:31 KST",
+  "summary": [
+    "코스피 상승, 투자 심리 개선 기대감.",
+    "코스닥 강세, 기술주 중심 자금 유입.",
+    "변동성 확대, 투자 전략 재점검 필요성."
+  ],
+  "market_strength": "★★★",
   "sectors": [],
   "stocks": [],
   "news": [
@@ -82,39 +86,39 @@
       "pos": true
     },
     "sp500": {
-      "price": 6862.0,
-      "change": 19.0,
-      "pct": 0.27,
-      "pos": true
+      "price": 6838.0,
+      "change": -43.0,
+      "pct": -0.63,
+      "pos": false
     },
     "nasdaq": {
-      "price": 22683.0,
-      "change": 104.0,
-      "pct": 0.46,
-      "pos": true
+      "price": 22585.0,
+      "change": -168.0,
+      "pct": -0.74,
+      "pos": false
     },
     "usdkrw": {
-      "price": 1450.1,
-      "change": 9.9,
-      "pct": 0.69,
+      "price": 1450.6,
+      "change": 10.4,
+      "pct": 0.72,
       "pos": true
     },
     "us10y": {
-      "price": 4.075,
-      "change": 0.0,
-      "pct": 0.0,
-      "pos": true
+      "price": 4.073,
+      "change": -0.002,
+      "pct": -0.05,
+      "pos": false
     },
     "wti": {
-      "price": 66.29,
-      "change": -0.14,
-      "pct": -0.21,
+      "price": 66.05,
+      "change": -0.38,
+      "pct": -0.57,
       "pos": false
     },
     "gold": {
-      "price": 5064.0,
-      "change": 88.0,
-      "pct": 1.77,
+      "price": 5062.0,
+      "change": 86.0,
+      "pct": 1.73,
       "pos": true
     }
   }
