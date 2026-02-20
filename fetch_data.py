@@ -4,28 +4,26 @@
 
 ■ 노션 페이지 구조 (인라인 DB 4개, 순서 중요)
 
-  [DB 1] 시장 요약          ← 하루 1행
-    날짜       : title       "2026-02-19"
-    시장 강도  : select      "강세" / "약세" / "보합"
-    AI 3줄 요약: rich_text   줄바꿈(\n)으로 3줄 구분
+  [DB 1] Daily Market Log      ← 하루 1행
+    날짜        : title         "2026-02-20"  ← Title 컬럼, 날짜 필터 기준
+    시장 강도   : select        "강세" / "약세" / "보합"
+    AI 3줄 요약 : rich_text     줄바꿈(\n)으로 3줄 구분
 
-  [DB 2] 섹터 & 특이 종목   ← 하루 1행 (셀 안에 여러 항목을 줄바꿈으로)
-    날짜       : title       "2026-02-19"
-    주도 섹터  : rich_text   "반도체 | +3.42%\nAI | +2.81%\n..."
-    특이 종목  : rich_text   "SK하이닉스 | HBM 뉴스 | 185,400 | +5.23%\n..."
+  [DB 2] 주도 종목 분석         ← 하루 1행
+    종목명      : title         오늘 날짜 입력 "2026-02-20"  ← 날짜 필터 기준
+    주도 섹터   : rich_text     "반도체 | +3.42%\nAI | +2.81%\n..."
+    특이 종목   : rich_text     "SK하이닉스 | HBM 뉴스 | 185,400 | +5.23%\n..."
 
-  [DB 3] 뉴스               ← 하루 N행 (뉴스 1건 = 1행)
-    날짜       : title       "2026-02-19"  ← 없으면 최신순 자동 폴백
-    뉴스 제목  : rich_text   헤드라인 텍스트
-    AI 뉴스 요약: rich_text  한 줄 요약
+  [DB 3] 핵심 뉴스 아카이브     ← 뉴스 1건 = 1행, 날짜 필터 없이 최신 10건 자동 수집
+    뉴스 제목   : title         헤드라인 텍스트
+    AI 뉴스 요약: rich_text     한 줄 요약
 
-  [DB 4] 추천 종목          ← 하루 3~5행 (종목 1개 = 1행)
-    날짜       : title       "2026-02-19"
-    티커       : rich_text   "005930 · KRX"
-    목표가     : number      92000
-    투자기간   : select      "단기" / "중기" / "장기"
-    추천등급   : select      "A+" / "A" / "B+" / "B" / "C"
-    추천이유   : rich_text   자유 텍스트
+  [DB 4] 추천종목               ← 하루 3~5행, 종목 1개 = 1행
+    날짜        : title         "2026-02-20"  ← Title 컬럼, 날짜 필터 기준
+    종목명      : rich_text     "삼성전자"
+    추천등급    : select        "A+" / "A" / "B+" / "B" / "C"
+    투자기간    : select        "단기" / "중기" / "장기"
+    추천사유    : rich_text     자유 텍스트
 
 ■ 금융 지수 (Yahoo Finance — 외부 라이브러리 불필요)
   KOSPI / KOSDAQ / S&P500 / NASDAQ
@@ -157,9 +155,11 @@ def query_latest(db_id, limit=10):
 # DB 1 — 시장 요약
 # ══════════════════════════════════════════════════════
 def parse_db1(db_id, today_str):
+    # DB1: Daily Market Log
+    # 컬럼: 날짜(title) / 시장 강도(select) / AI 3줄 요약(rich_text)
     rows = query_by_date(db_id, "날짜", today_str)
     if not rows:
-        print(f"  [DB1] ⚠ 오늘({today_str}) 행 없음")
+        print(f"  [DB1] ⚠ 오늘({today_str}) 행 없음 → 노션에 오늘 날짜 행을 추가하세요")
         return {"summary": [], "market_strength": ""}
 
     row      = rows[0]
@@ -189,9 +189,12 @@ def parse_pipe(text):
     return result
 
 def parse_db2(db_id, today_str):
-    rows = query_by_date(db_id, "날짜", today_str)
+    # DB2: 주도 종목 분석
+    # 컬럼: 종목명(title) / 주도 섹터(rich_text) / 특이 종목(rich_text)
+    # ※ Title 컬럼(종목명)에 오늘 날짜를 입력해서 행을 구분
+    rows = query_by_date(db_id, "종목명", today_str)
     if not rows:
-        print(f"  [DB2] ⚠ 오늘({today_str}) 행 없음")
+        print(f"  [DB2] ⚠ 오늘({today_str}) 행 없음 → 종목명 컬럼에 오늘 날짜를 입력하세요")
         return {"sectors": [], "stocks": []}
 
     row     = rows[0]
@@ -239,26 +242,20 @@ def created_to_kst(iso_str):
         return ""
 
 def parse_db3(db_id, today_str):
-    # 날짜 컬럼 필터 시도 → 없으면 최신 10건 폴백
+    # DB3: 핵심 뉴스 아카이브
+    # 컬럼: 뉴스 제목(title) / AI 뉴스 요약(rich_text)
+    # ※ 날짜 컬럼 없음 → 최신 생성순 10건 자동 수집
     rows = []
     try:
-        rows = query_by_date(db_id, "날짜", today_str)
-    except Exception:
-        pass
-
-    if not rows:
-        print(f"  [DB3] 날짜 필터 결과 없음 → 최신 10건 사용")
-        try:
-            rows = query_latest(db_id, limit=10)
-        except Exception as e:
-            print(f"  [DB3] ❌ 뉴스 조회 실패: {e}")
-            return {"news": []}
+        rows = query_latest(db_id, limit=10)
+        print(f"  [DB3] 최신 {len(rows)}건 조회")
+    except Exception as e:
+        print(f"  [DB3] ❌ 뉴스 조회 실패: {e}")
+        return {"news": []}
 
     news = []
     for row in rows:
-        # 뉴스 제목 컬럼이 title 또는 rich_text 둘 다 허용
-        headline = (get_prop(row, "뉴스 제목", "title")
-                    or get_prop(row, "뉴스 제목", "rich_text"))
+        headline = get_prop(row, "뉴스 제목", "title")
         summary  = get_prop(row, "AI 뉴스 요약", "rich_text")
         time_str = created_to_kst(row.get("created_time", ""))
 
@@ -267,7 +264,7 @@ def parse_db3(db_id, today_str):
                 "time"    : time_str,
                 "headline": headline,
                 "summary" : summary,
-                "tag"     : "",  # 태그 컬럼 추가 시 여기 연결
+                "tag"     : "",
             })
 
     print(f"  [DB3] 뉴스={len(news)}건")
@@ -298,7 +295,7 @@ def parse_db4(db_id, today_str):
         name      = get_prop(row, "종목명", "rich_text")
         grade     = get_prop(row, "추천등급", "select")
         timeframe = get_prop(row, "투자기간", "select")
-        reason    = get_prop(row, "추천이유", "rich_text")
+        reason    = get_prop(row, "추천사유", "rich_text")
 
         if not name:
             continue
@@ -506,6 +503,9 @@ def main():
     print(f"\n✅ data.json 저장 완료")
     print(f"   {out_path}")
     print(DIV)
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
