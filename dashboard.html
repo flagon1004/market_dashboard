@@ -6,12 +6,13 @@
 <title>SIGNAL · 오늘의 투자 브리핑</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 :root {
   --bg:#0a0b0e; --surface:#111318; --surface2:#1a1d26;
   --border:#2a2d3a; --accent:#c8a96e; --accent2:#4fc3f7;
   --positive:#4caf82; --negative:#e05c5c;
+  /* 한국 주식 관례: 상승=빨강, 하락=파랑/초록 */
+  --up:#e05c5c; --down:#4caf82;
   --text:#e8e6e0; --muted:#7a7f8e; --dim:#4a4f5e;
   --radius:12px; --gap:1.25rem;
 }
@@ -19,6 +20,7 @@
   --bg:#f5f3ef; --surface:#fff; --surface2:#f0ede8;
   --border:#ddd9d0; --accent:#9a7840; --accent2:#0277bd;
   --positive:#2e7d52; --negative:#c0392b;
+  --up:#c0392b; --down:#2e7d52;
   --text:#1a1a1a; --muted:#5a5a6a; --dim:#9a9aaa;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -50,16 +52,24 @@ header{position:sticky;top:0;z-index:100;
 .btn-ic{background:var(--surface2);border:1px solid var(--border);color:var(--muted);
   width:34px;height:34px;border-radius:6px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:.95rem;
-  transition:all .2s}
+  transition:all .2s;position:relative}
 .btn-ic:hover{border-color:var(--accent);color:var(--accent)}
+/* 툴팁 */
+.btn-ic .tooltip{
+  display:none;position:absolute;top:calc(100% + 8px);right:0;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);font-size:.68rem;font-family:'Noto Sans KR',sans-serif;
+  white-space:nowrap;padding:.35rem .65rem;border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:200;line-height:1.4}
+.btn-ic:hover .tooltip{display:block}
 
 /* ── LAYOUT ── */
 .wrap{max-width:1300px;margin:0 auto;padding:1.75rem var(--gap)}
 .row{display:grid;gap:var(--gap);margin-bottom:var(--gap)}
 .r1{grid-template-columns:1fr 340px}
-.r2{grid-template-columns:1fr 1fr}
+.r2{grid-template-columns:1fr}  /* 섹터+종목 세로 배치 */
 .r3{grid-template-columns:3fr 2fr}
-@media(max-width:1000px){.r1,.r2,.r3{grid-template-columns:1fr}}
+@media(max-width:1000px){.r1,.r3{grid-template-columns:1fr}}
 @media(max-width:600px){.wrap{padding:1rem .75rem}}
 
 /* ── CARD ── */
@@ -87,7 +97,8 @@ header{position:sticky;top:0;z-index:100;
 .idx-val{font-family:'IBM Plex Mono',monospace;font-size:1rem;
   margin:.15rem 0 .1rem;color:var(--text)}
 .idx-chg{font-family:'IBM Plex Mono',monospace;font-size:.72rem}
-.pos{color:var(--positive)}.neg{color:var(--negative)}
+/* 상승=빨강, 하락=초록 (한국 관례) */
+.up{color:var(--up)}.down{color:var(--down)}
 
 /* ── SUMMARY ── */
 .sum-list{list-style:none;display:flex;flex-direction:column;gap:.65rem}
@@ -98,28 +109,22 @@ header{position:sticky;top:0;z-index:100;
   color:var(--accent);min-width:16px;padding-top:1px;flex-shrink:0}
 
 /* ── SECTORS ── */
-.sec-list{display:flex;flex-direction:column;gap:.55rem}
-.sec-row{display:flex;align-items:center;gap:.7rem;font-size:.8rem}
-.sec-name{min-width:90px;color:var(--text);font-size:.78rem}
-.bar-wrap{flex:1;background:var(--surface2);border-radius:3px;height:5px;overflow:hidden}
-.bar{height:100%;border-radius:3px;width:0;
-  transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.bar.p{background:var(--accent)}.bar.n{background:var(--negative)}
-.sec-val{font-family:'IBM Plex Mono',monospace;font-size:.73rem;min-width:52px;text-align:right}
+.sec-list{display:flex;flex-direction:column;gap:.7rem}
+.sec-box{padding:1rem 1.2rem;background:var(--surface2);border-radius:10px;
+  border:1px solid var(--border);transition:border-color .2s}
+.sec-box:hover{border-color:var(--accent)}
+.sec-name{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.sec-desc{font-size:.9rem;color:var(--text);line-height:1.6}
 
 /* ── STOCKS ── */
-.stk-list{display:flex;flex-direction:column;gap:.45rem}
-.stk-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;
-  gap:.8rem;padding:.65rem .9rem;background:var(--surface2);
-  border-radius:8px;border:1px solid transparent;transition:border-color .2s}
-.stk-row:hover{border-color:var(--border)}
-.stk-nm{font-size:.85rem;font-weight:500}
-.stk-rs{font-size:.71rem;color:var(--muted);margin-top:1px}
-.stk-px{font-family:'IBM Plex Mono',monospace;font-size:.8rem;text-align:right}
-.badge-chg{font-family:'IBM Plex Mono',monospace;font-size:.73rem;
-  padding:.15rem .45rem;border-radius:4px}
-.badge-chg.p{background:rgba(76,175,130,.15);color:var(--positive)}
-.badge-chg.n{background:rgba(224,92,92,.15);color:var(--negative)}
+.stk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem}
+@media(max-width:1000px){.stk-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.stk-grid{grid-template-columns:repeat(2,1fr)}}
+.stk-box{padding:.75rem .9rem;background:var(--surface2);border-radius:8px;
+  border:1px solid transparent;transition:border-color .2s;text-align:center}
+.stk-box:hover{border-color:var(--border)}
+.stk-nm{font-size:.85rem;font-weight:500;margin-bottom:.3rem}
+.stk-chg{font-family:'IBM Plex Mono',monospace;font-size:.88rem;font-weight:500}
 
 /* ── NEWS ── */
 .news-list{display:flex;flex-direction:column}
@@ -129,6 +134,7 @@ header{position:sticky;top:0;z-index:100;
   color:var(--dim);min-width:40px;padding-top:2px;flex-shrink:0}
 .news-body{flex:1}
 .news-hl{font-size:.82rem;color:var(--text);line-height:1.45}
+.news-summary{font-size:.75rem;color:var(--muted);line-height:1.45;margin-top:.25rem}
 .tag{display:inline-block;font-size:.62rem;font-family:'IBM Plex Mono',monospace;
   padding:.08rem .38rem;border-radius:3px;margin-top:.3rem;
   background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
@@ -159,9 +165,6 @@ header{position:sticky;top:0;z-index:100;
   .rec-card.featured{grid-column:span 1;grid-template-columns:1fr}
 }
 
-/* ── SECTOR CHART ── */
-.chart-wrap{position:relative;height:180px;margin-top:.5rem}
-
 /* ── EMPTY STATE ── */
 .empty{text-align:center;padding:2.5rem 1rem;color:var(--dim);
   font-family:'IBM Plex Mono',monospace;font-size:.75rem;line-height:1.8}
@@ -172,23 +175,28 @@ header{position:sticky;top:0;z-index:100;
   .btn-ic,.hdr-r .sync-pill{display:none}
   body{background:#fff;color:#000}
   .card{border:1px solid #ccc;break-inside:avoid;opacity:1;transform:none;animation:none}
-  .surface2,.idx-item,.stk-row,.rec-card{background:#f5f5f5!important}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">◈ <em>SIGNAL · 오늘의 투자 브리핑</em></div>
+  <div class="logo">◈ SIGNAL <em>· 오늘의 투자 브리핑</em></div>
   <div class="hdr-r">
     <div class="sync-pill">
       <div class="dot loading" id="syncDot"></div>
       <span id="syncTxt">로딩 중...</span>
     </div>
     <div class="badge" id="updBadge">—</div>
-    <button class="btn-ic" onclick="toggleTheme()" title="테마 전환">☀</button>
-    <button class="btn-ic" onclick="window.print()" title="인쇄 / PDF">⎙</button>
-    <button class="btn-ic" onclick="loadData()" title="새로고침">↻</button>
+    <button class="btn-ic" onclick="toggleTheme()" title="테마 전환">☀
+      <span class="tooltip">라이트 / 다크 모드 전환</span>
+    </button>
+    <button class="btn-ic" onclick="window.print()" title="인쇄 / PDF">⎙
+      <span class="tooltip">인쇄 또는 PDF 저장</span>
+    </button>
+    <button class="btn-ic" onclick="loadData()" title="새로고침">↻
+      <span class="tooltip">주요 지수만 리프레시 됩니다.<br>노션 데이터는 매일 오전 8시<br>자동 업데이트됩니다.</span>
+    </button>
   </div>
 </header>
 
@@ -210,7 +218,7 @@ header{position:sticky;top:0;z-index:100;
     </div>
   </div>
 
-  <!-- ROW 2: 주도 섹터 + 특이 종목 -->
+  <!-- ROW 2: 주도 섹터 (위) + 금일 특이 종목 (아래) -->
   <div class="row r2">
     <div class="card c3">
       <div class="lbl">주도 섹터 분석</div>
@@ -220,7 +228,7 @@ header{position:sticky;top:0;z-index:100;
     </div>
     <div class="card c4">
       <div class="lbl">금일 특이 종목</div>
-      <div class="stk-list" id="stocksEl">
+      <div class="stk-grid" id="stocksEl">
         <div class="empty">로딩 중...</div>
       </div>
     </div>
@@ -243,12 +251,10 @@ header{position:sticky;top:0;z-index:100;
     </div>
   </div>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
-// ─────────────────────────────────────────────
-// 테마
-// ─────────────────────────────────────────────
+// ── 테마
 function toggleTheme(){
   const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', t);
@@ -257,227 +263,144 @@ function toggleTheme(){
 const st = localStorage.getItem('theme');
 if(st) document.documentElement.setAttribute('data-theme', st);
 
-// ─────────────────────────────────────────────
-// 숫자 포맷
-// ─────────────────────────────────────────────
+// ── 색상: 상승=빨강(up), 하락=초록(down) — 한국 주식 관례
+function updown(pos){ return pos ? 'up' : 'down'; }
+function arrow(pos){ return pos ? '▲' : '▼'; }
+
+// ── 숫자 포맷
 function fmt(n, dec=2){
-  if(n === undefined || n === null || isNaN(n)) return '—';
-  return Number(n).toLocaleString('ko-KR', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+  if(n===undefined||n===null||isNaN(n)) return '—';
+  return Number(n).toLocaleString('ko-KR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 }
-function sign(n){ return n >= 0 ? '▲' : '▼'; }
-function cls(n){ return n >= 0 ? 'pos' : 'neg'; }
 
-// ─────────────────────────────────────────────
-// 렌더러
-// ─────────────────────────────────────────────
+// ── 렌더러
 function renderIndices(idx){
-  if(!idx){ document.getElementById('indicesEl').innerHTML = '<div class="empty" style="grid-column:span 2">지수 데이터 없음</div>'; return; }
-
-  const MAP = [
-    {key:'kospi',  label:'KOSPI',    dec:0},
-    {key:'kosdaq', label:'KOSDAQ',   dec:0},
-    {key:'sp500',  label:'S&P 500',  dec:0},
-    {key:'nasdaq', label:'NASDAQ',   dec:0},
-    {key:'usdkrw', label:'USD/KRW',  dec:1},
-    {key:'us10y',  label:'미국채 10Y',dec:2},
-    {key:'wti',    label:'WTI 유가', dec:2},
-    {key:'gold',   label:'금 (XAU)', dec:0},
+  if(!idx){ document.getElementById('indicesEl').innerHTML='<div class="empty" style="grid-column:span 2">지수 데이터 없음</div>'; return; }
+  const MAP=[
+    {key:'kospi', label:'KOSPI',    dec:0},
+    {key:'kosdaq',label:'KOSDAQ',   dec:0},
+    {key:'sp500', label:'S&P 500',  dec:0},
+    {key:'nasdaq',label:'NASDAQ',   dec:0},
+    {key:'usdkrw',label:'USD/KRW',  dec:1},
+    {key:'us10y', label:'미국채 10Y',dec:2},
+    {key:'wti',   label:'WTI 유가', dec:2},
+    {key:'gold',  label:'금 (XAU)', dec:0},
   ];
-
-  document.getElementById('indicesEl').innerHTML = MAP.map(({key,label,dec}) => {
-    const d = idx[key];
-    if(!d) return '';
-    const p = d.pos;
+  document.getElementById('indicesEl').innerHTML = MAP.map(({key,label,dec})=>{
+    const d=idx[key]; if(!d) return '';
     return `<div class="idx-item">
       <div class="idx-name">${label}</div>
-      <div class="idx-val ${cls(d.change)}">${fmt(d.price, dec)}</div>
-      <div class="idx-chg ${cls(d.change)}">${sign(d.change)} ${fmt(Math.abs(d.pct),2)}%</div>
+      <div class="idx-val">${fmt(d.price,dec)}</div>
+      <div class="idx-chg ${updown(d.pos)}">${arrow(d.pos)} ${fmt(Math.abs(d.pct),2)}%</div>
     </div>`;
   }).join('');
 }
 
 function renderSummary(arr){
-  const el = document.getElementById('summaryEl');
-  if(!arr?.length){ el.innerHTML = '<div class="empty">노션에서 시장 요약을 작성해주세요</div>'; return; }
-  el.innerHTML = arr.slice(0,3).map((s,i) =>
+  const el=document.getElementById('summaryEl');
+  if(!arr?.length){ el.innerHTML='<div class="empty">노션에서 시장 요약을 작성해주세요</div>'; return; }
+  el.innerHTML=arr.slice(0,3).map((s,i)=>
     `<li><span class="sum-n">${String(i+1).padStart(2,'0')}</span>${s}</li>`
   ).join('');
 }
 
 function renderSectors(arr){
-  const el = document.getElementById('sectorEl');
-  if(!arr?.length){ el.innerHTML = '<div class="empty">섹터 데이터 없음</div>'; return; }
-  const maxAbs = Math.max(...arr.map(s => Math.abs(s.value)), 1);
-  el.innerHTML = arr.map(s => {
-    const pct = Math.abs(s.value) / maxAbs * 100;
-    const pc = s.value >= 0;
-    return `<div class="sec-row">
-      <span class="sec-name">${s.name}</span>
-      <div class="bar-wrap"><div class="bar ${pc?'p':'n'}" data-w="${pct}"></div></div>
-      <span class="sec-val ${pc?'pos':'neg'}">${s.change}</span>
-    </div>`;
-  }).join('');
-  // 애니메이션 트리거
-  requestAnimationFrame(() => {
-    el.querySelectorAll('.bar').forEach(b => { b.style.width = b.dataset.w + '%'; });
-  });
+  const el=document.getElementById('sectorEl');
+  if(!arr?.length){ el.innerHTML='<div class="empty">섹터 데이터 없음</div>'; return; }
+  el.innerHTML=arr.map(s=>
+    `<div class="sec-box">
+      <div class="sec-name">${s.name}</div>
+      <div class="sec-desc">${s.change}</div>
+    </div>`
+  ).join('');
 }
 
 function renderStocks(arr){
-  const el = document.getElementById('stocksEl');
-  if(!arr?.length){ el.innerHTML = '<div class="empty">특이 종목 데이터 없음</div>'; return; }
-  el.innerHTML = arr.map(s =>
-    `<div class="stk-row">
-      <div>
-        <div class="stk-nm">${s.name}</div>
-        <div class="stk-rs">${s.reason}</div>
-      </div>
-      <div class="stk-px">${s.price}</div>
-      <div class="badge-chg ${s.pos?'p':'n'}">${s.change}</div>
+  const el=document.getElementById('stocksEl');
+  if(!arr?.length){ el.innerHTML='<div class="empty" style="grid-column:span 4">특이 종목 데이터 없음</div>'; return; }
+  el.innerHTML=arr.map(s=>
+    `<div class="stk-box">
+      <div class="stk-nm">${s.name}</div>
+      <div class="stk-chg ${updown(s.pos)}">${s.change}</div>
     </div>`
   ).join('');
 }
 
 function renderNews(arr){
-  const el = document.getElementById('newsEl');
-  if(!arr?.length){ el.innerHTML = '<div class="empty">뉴스 데이터 없음</div>'; return; }
-  el.innerHTML = arr.map(n =>
+  const el=document.getElementById('newsEl');
+  if(!arr?.length){ el.innerHTML='<div class="empty">뉴스 데이터 없음</div>'; return; }
+  el.innerHTML=arr.map(n=>
     `<div class="news-row">
       <div class="news-t">${n.time}</div>
       <div class="news-body">
         <div class="news-hl">${n.headline}</div>
-        ${n.tag ? `<span class="tag">${n.tag}</span>` : ''}
+        ${n.summary?`<div class="news-summary">${n.summary}</div>`:''}
+        ${n.tag?`<span class="tag">${n.tag}</span>`:''}
       </div>
     </div>`
   ).join('');
 }
 
 function renderRec(arr){
-  const el = document.getElementById('recEl');
-  if(!arr?.length){ el.innerHTML = '<div class="empty" style="grid-column:span 2">추천 종목 데이터 없음</div>'; return; }
-  el.innerHTML = arr.map((r,i) => {
-    const featured = r.featured || i === 0;
+  const el=document.getElementById('recEl');
+  if(!arr?.length){ el.innerHTML='<div class="empty" style="grid-column:span 2">추천 종목 데이터 없음</div>'; return; }
+  el.innerHTML=arr.map((r,i)=>{
+    const featured=r.featured||i===0;
     if(featured){
       return `<div class="rec-card featured">
         <div>
-          <div class="rec-ticker">${r.ticker}</div>
           <div class="rec-nm">${r.name}</div>
           <div class="rec-rs">${r.reason}</div>
           <div class="rec-meta">
-            ${r.target ? `<span class="rec-tgt">목표가 ${r.target}</span>` : ''}
-            ${r.timeframe ? `<span class="rec-tf">${r.timeframe}</span>` : ''}
+            ${r.timeframe?`<span class="rec-tf">${r.timeframe}</span>`:''}
+            ${r.grade?`<span class="rec-grade">${r.grade}</span>`:''}
           </div>
         </div>
         <div class="rec-rating">
-          <div class="rec-score">${r.grade || 'A'}</div>
+          <div class="rec-score">${r.grade||'A'}</div>
           <div class="rec-lbl">TOP PICK</div>
         </div>
       </div>`;
     }
     return `<div class="rec-card">
-      <div class="rec-ticker">${r.ticker}</div>
       <div class="rec-nm">${r.name}</div>
       <div class="rec-rs">${r.reason}</div>
       <div class="rec-meta">
-        ${r.target ? `<span class="rec-tgt">목표가 ${r.target}</span>` : ''}
-        ${r.timeframe ? `<span class="rec-tf">${r.timeframe}</span>` : ''}
+        ${r.timeframe?`<span class="rec-tf">${r.timeframe}</span>`:''}
+        ${r.grade?`<span class="rec-grade">${r.grade}</span>`:''}
       </div>
     </div>`;
   }).join('');
-  document.getElementById('disclaimerEl').textContent =
+  document.getElementById('disclaimerEl').textContent=
     '* 본 추천은 정보 제공 목적이며 투자 판단의 최종 책임은 투자자 본인에게 있습니다.';
 }
 
-// ─────────────────────────────────────────────
-// 데이터 로드
-// ─────────────────────────────────────────────
+// ── 데이터 로드
 async function loadData(){
-  const dot = document.getElementById('syncDot');
-  const txt = document.getElementById('syncTxt');
-  dot.className = 'dot loading';
-  txt.textContent = '데이터 로딩 중...';
-
-  try {
-    // data.json은 fetch_data.py가 생성하는 파일 (같은 디렉토리)
-    const res = await fetch('data.json?t=' + Date.now());
+  const dot=document.getElementById('syncDot');
+  const txt=document.getElementById('syncTxt');
+  dot.className='dot loading';
+  txt.textContent='데이터 로딩 중...';
+  try{
+    const res=await fetch('data.json?t='+Date.now());
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    const d = await res.json();
-
+    const d=await res.json();
     renderSummary(d.summary);
     renderSectors(d.sectors);
     renderStocks(d.stocks);
     renderNews(d.news);
     renderRec(d.recommendations);
     renderIndices(d.indices);
-
-    // 헤더 업데이트
-    const kst = d.updated_kst || '—';
-    document.getElementById('updBadge').textContent = kst;
-    dot.className = 'dot';
-    txt.textContent = '정상 연동됨';
-  } catch(e){
-    dot.className = 'dot err';
-    txt.textContent = 'data.json 로드 실패';
+    document.getElementById('updBadge').textContent=d.updated_kst||'—';
+    dot.className='dot';
+    txt.textContent='정상 연동됨';
+  }catch(e){
+    dot.className='dot err';
+    txt.textContent='data.json 로드 실패';
     console.error(e);
-    // 실패시 샘플 데이터 표시
-    loadSampleData();
   }
 }
 
-// ─────────────────────────────────────────────
-// 샘플 데이터 (data.json 없을 때 표시)
-// ─────────────────────────────────────────────
-function loadSampleData(){
-  document.getElementById('updBadge').textContent = '샘플 데이터';
-  renderSummary([
-    '미 연준 금리 동결 시사에 코스피·나스닥 동반 상승. 외국인 순매수 전환이 지수 방어에 기여했다.',
-    'AI 반도체 섹터 급등. 엔비디아 실적 서프라이즈 효과로 SK하이닉스·삼성전자 HBM 관련주 동반 강세.',
-    '원/달러 환율 1,310원대 안정. 국내 수출주 밸류에이션 개선 기대감이 코스피 안착을 이끌었다.',
-  ]);
-  renderSectors([
-    {name:'반도체',    change:'+3.42%', value:3.42},
-    {name:'AI·소프트웨어', change:'+2.81%', value:2.81},
-    {name:'2차전지',   change:'+2.20%', value:2.20},
-    {name:'바이오',    change:'+1.58%', value:1.58},
-    {name:'자동차',    change:'+1.12%', value:1.12},
-    {name:'금융',     change:'-0.84%', value:-0.84},
-    {name:'건설·부동산',change:'-1.43%', value:-1.43},
-  ]);
-  renderStocks([
-    {name:'SK하이닉스',   reason:'HBM3E 16단 양산 확대 뉴스',  price:'185,400', change:'+5.23%', pos:true},
-    {name:'한미반도체',   reason:'TC본더 신규 수주 계약 체결',  price:'94,800',  change:'+8.71%', pos:true},
-    {name:'삼성SDI',     reason:'유럽 전기차 수요 둔화 우려',   price:'312,000', change:'-3.12%', pos:false},
-    {name:'카카오페이',   reason:'해외결제 서비스 확대 발표',    price:'24,650',  change:'+4.46%', pos:true},
-    {name:'HDC현대산업개발',reason:'PF 부실 우려 재확산',       price:'16,200',  change:'-4.82%', pos:false},
-  ]);
-  renderNews([
-    {time:'09:02', headline:'연준 1월 의사록 — 금리인하 "서두를 필요 없다" 기조 재확인, 시장 예상 부합', tag:'통화정책'},
-    {time:'10:15', headline:'엔비디아 블랙웰 GPU 공급난 심화 — 국내 HBM·패키징 기업 반사이익 기대 고조', tag:'반도체'},
-    {time:'11:33', headline:'정부, 코리아 디스카운트 해소 2차 밸류업 프로그램 발표 — 자사주 소각 의무화 논의', tag:'정책·규제'},
-    {time:'13:47', headline:'중국 전기차 BYD 국내 출시 재연기 — 국산 완성차·배터리주 단기 수혜 전망', tag:'자동차·배터리'},
-    {time:'15:10', headline:'부동산 PF 연체율 역대 최고치 — 건설·저축은행 섹터 투자심리 위축 지속', tag:'부동산·금융'},
-  ]);
-  renderRec([
-    {ticker:'005930 · KRX', name:'삼성전자', reason:'HBM 전환 가속 및 파운드리 수주 회복 사이클 진입. 저점 분할매수 구간.', target:'92,000', timeframe:'3개월', grade:'A+', featured:true},
-    {ticker:'000660 · KRX', name:'SK하이닉스', reason:'HBM3E 독점 공급 지위 유지. 고수익성 지속.', target:'210,000', timeframe:'3개월'},
-    {ticker:'035420 · KRX', name:'NAVER', reason:'HyperCLOVA X B2B 전환 가속. AI 수익화 초입.', target:'230,000', timeframe:'6개월'},
-    {ticker:'207940 · KRX', name:'삼성바이오로직스', reason:'CDMO 수주 파이프라인 확대. 방어적 성장주.', target:'1,050,000', timeframe:'6개월'},
-  ]);
-  renderIndices({
-    kospi: {price:2624, change:30.2, pct:1.24, pos:true},
-    kosdaq:{price:875,  change:7.6,  pct:0.87, pos:true},
-    sp500: {price:5912, change:31.2, pct:0.53, pos:true},
-    nasdaq:{price:19420,change:180,  pct:0.94, pos:true},
-    usdkrw:{price:1313, change:-2.7, pct:-0.21,pos:false},
-    us10y: {price:4.28, change:0.03, pct:0.70, pos:true},
-    wti:   {price:72.4, change:-0.6, pct:-0.82,pos:false},
-    gold:  {price:2920, change:12.0, pct:0.41, pos:true},
-  });
-}
-
-// ─────────────────────────────────────────────
-// 시작
-// ─────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', loadData);
 </script>
 </body>
