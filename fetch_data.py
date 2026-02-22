@@ -220,30 +220,35 @@ def parse_db2(db_id, today_str):
     sec_raw = get_prop(row, "주도 섹터", "rich_text")
     stk_raw = get_prop(row, "특이 종목", "rich_text")
 
-    # ── 섹터: "섹터명 | +3.42%"
+    # ── 섹터 파싱: "**섹터명**: 내용설명" 형식
+    # 예) "1. **정치 테마**: 광동제약 등 급등. 2. **보험 & 에너지**: 한화생명 강세."
+    import re
     sectors = []
-    for parts in parse_pipe(sec_raw):
-        if len(parts) >= 2 and parts[0]:
-            chg = parts[1]
-            if chg and not chg.startswith(("+", "-")):
-                chg = f"+{chg}"
+    # **섹터명**: 내용 패턴 찾기
+    sec_matches = re.findall(r"\*\*(.+?)\*\*\s*:\s*(.+?)(?=\d+\.\s*\*\*|$)", sec_raw, re.DOTALL)
+    for name, desc in sec_matches:
+        name = name.strip()
+        desc = desc.strip().rstrip(".,; ")
+        if name:
             sectors.append({
-                "name"  : parts[0],
-                "change": chg,
-                "value" : safe_float(chg),
+                "name"  : name,
+                "change": desc,   # 설명 텍스트를 change 필드에 저장
+                "value" : 0,
             })
 
-    # ── 특이 종목: "종목명 | 사유 | 가격 | 등락률"
+    # ── 특이 종목 파싱: "종목명(+30.00%), 종목명2(+29.92%)" 형식
     stocks = []
-    for parts in parse_pipe(stk_raw):
-        if len(parts) >= 4 and parts[0]:
-            chg = parts[3]
+    stk_matches = re.findall(r"([가-힣A-Za-z&]+)\(([+-]?\d+\.?\d*%)\)", stk_raw)
+    for name, chg in stk_matches:
+        name = name.strip()
+        chg  = chg.strip()
+        if name:
             stocks.append({
-                "name"  : parts[0],
-                "reason": parts[1],
-                "price" : parts[2],
-                "change": chg,
-                "pos"   : not chg.strip().startswith("-"),
+                "name"  : name,
+                "reason": "",
+                "price" : "",
+                "change": chg if chg.startswith(("+","-")) else f"+{chg}",
+                "pos"   : not chg.startswith("-"),
             })
 
     print(f"  [DB2] 섹터={len(sectors)}개, 종목={len(stocks)}개")
