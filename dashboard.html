@@ -314,14 +314,12 @@ function renderStrength(val){
   const badge = document.getElementById('strengthBadge');
   if(!val){ badge.style.display='none'; return; }
 
-  // 별 개수로 강도 파악
+  // 별 개수로 강도 파악 (3단계)
   const stars = (val.match(/★/g)||[]).length;
   const MAP = {
-    5: {cls:'strength-5', emoji:'🔴', label:'매우 강세'},
-    4: {cls:'strength-4', emoji:'🟠', label:'강세'},
-    3: {cls:'strength-3', emoji:'🟡', label:'보합'},
-    2: {cls:'strength-2', emoji:'🟢', label:'약세'},
-    1: {cls:'strength-1', emoji:'🔵', label:'매우 약세'},
+    3: {cls:'strength-5', emoji:'🔴', label:'강세'},
+    2: {cls:'strength-3', emoji:'🟡', label:'보합'},
+    1: {cls:'strength-1', emoji:'🔵', label:'약세'},
   };
   const info = MAP[stars] || {cls:'strength-3', emoji:'🟡', label:val};
   badge.className = `strength-badge ${info.cls}`;
