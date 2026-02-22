@@ -165,6 +165,17 @@ header{position:sticky;top:0;z-index:100;
   .rec-card.featured{grid-column:span 1;grid-template-columns:1fr}
 }
 
+/* ── MARKET STRENGTH BADGE ── */
+.lbl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem}
+.lbl-row .lbl{margin-bottom:0}
+.strength-badge{font-size:.82rem;font-weight:500;padding:.2rem .7rem;
+  border-radius:20px;border:1px solid;white-space:nowrap}
+.strength-5{background:rgba(224,92,92,.15);color:#e05c5c;border-color:rgba(224,92,92,.4)}
+.strength-4{background:rgba(224,140,92,.15);color:#e08c5c;border-color:rgba(224,140,92,.4)}
+.strength-3{background:rgba(200,169,110,.15);color:var(--accent);border-color:rgba(200,169,110,.4)}
+.strength-2{background:rgba(76,175,130,.15);color:#4caf82;border-color:rgba(76,175,130,.4)}
+.strength-1{background:rgba(79,195,247,.15);color:#4fc3f7;border-color:rgba(79,195,247,.4)}
+
 /* ── EMPTY STATE ── */
 .empty{text-align:center;padding:2.5rem 1rem;color:var(--dim);
   font-family:'IBM Plex Mono',monospace;font-size:.75rem;line-height:1.8}
@@ -205,7 +216,10 @@ header{position:sticky;top:0;z-index:100;
   <!-- ROW 1: 시장 요약 + 주요 지수 -->
   <div class="row r1">
     <div class="card c1">
-      <div class="lbl">시장 3줄 요약</div>
+      <div class="lbl-row">
+        <div class="lbl">시장 3줄 요약</div>
+        <span class="strength-badge" id="strengthBadge" style="display:none"></span>
+      </div>
       <ul class="sum-list" id="summaryEl">
         <div class="empty">데이터를 불러오는 중입니다...</div>
       </ul>
@@ -296,8 +310,28 @@ function renderIndices(idx){
   }).join('');
 }
 
-function renderSummary(arr){
+function renderStrength(val){
+  const badge = document.getElementById('strengthBadge');
+  if(!val){ badge.style.display='none'; return; }
+
+  // 별 개수로 강도 파악
+  const stars = (val.match(/★/g)||[]).length;
+  const MAP = {
+    5: {cls:'strength-5', emoji:'🔴', label:'매우 강세'},
+    4: {cls:'strength-4', emoji:'🟠', label:'강세'},
+    3: {cls:'strength-3', emoji:'🟡', label:'보합'},
+    2: {cls:'strength-2', emoji:'🟢', label:'약세'},
+    1: {cls:'strength-1', emoji:'🔵', label:'매우 약세'},
+  };
+  const info = MAP[stars] || {cls:'strength-3', emoji:'🟡', label:val};
+  badge.className = `strength-badge ${info.cls}`;
+  badge.textContent = `${info.emoji} ${val} ${info.label}`;
+  badge.style.display = 'inline-block';
+}
+
+function renderSummary(arr, strength){
   const el=document.getElementById('summaryEl');
+  renderStrength(strength||'');
   if(!arr?.length){ el.innerHTML='<div class="empty">노션에서 시장 요약을 작성해주세요</div>'; return; }
   el.innerHTML=arr.slice(0,3).map((s,i)=>
     `<li><span class="sum-n">${String(i+1).padStart(2,'0')}</span>${s}</li>`
@@ -385,7 +419,7 @@ async function loadData(){
     const res=await fetch('data.json?t='+Date.now());
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const d=await res.json();
-    renderSummary(d.summary);
+    renderSummary(d.summary, d.market_strength);
     renderSectors(d.sectors);
     renderStocks(d.stocks);
     renderNews(d.news);
