@@ -220,21 +220,30 @@ def parse_db2(db_id, today_str):
     sec_raw = get_prop(row, "주도 섹터", "rich_text")
     stk_raw = get_prop(row, "특이 종목", "rich_text")
 
-    # ── 섹터 파싱: "**섹터명**: 내용설명" 형식
-    # 예) "1. **정치 테마**: 광동제약 등 급등. 2. **보험 & 에너지**: 한화생명 강세."
+    # ── 섹터 파싱: 줄바꿈 기반, ** 마크다운 제거 후 처리
+    # 형식: "1. **섹터명:** 내용..." 또는 "1. 섹터명: 내용..."
+    # 공백줄, #제목줄, 짧은 안내문은 자동 제외
     import re
     sectors = []
-    # **섹터명**: 내용 패턴 찾기
-    sec_matches = re.findall(r"\*\*(.+?)\*\*\s*:\s*(.+?)(?=\d+\.\s*\*\*|$)", sec_raw, re.DOTALL)
-    for name, desc in sec_matches:
-        name = name.strip()
-        desc = desc.strip().rstrip(".,; ")
-        if name:
-            sectors.append({
-                "name"  : name,
-                "change": desc,   # 설명 텍스트를 change 필드에 저장
-                "value" : 0,
-            })
+    for line in sec_raw.replace("\r", "").split("\n"):
+        line = line.strip()
+        # 빈 줄, # 제목줄 건너뜀
+        if not line or line.startswith("#"):
+            continue
+        # ** 마크다운 기호 제거
+        clean = line.replace("**", "")
+        m = re.match(r"^[\d\.\s]*(.+?)\s*[:：]\s*(.+)", clean)
+        if m:
+            name = m.group(1).strip().lstrip("0123456789. ")
+            desc = m.group(2).strip()
+            # 섹터명이 너무 짧거나(1자), 내용이 너무 짧으면(10자 미만) 안내문으로 판단 제외
+            # "참고", "주의" 로 시작하는 안내문 제외
+            if name and len(name) >= 2 and len(desc) >= 10 and not name.startswith(("참고", "주의", "Note")):
+                sectors.append({
+                    "name"  : name,
+                    "change": desc,
+                    "value" : 0,
+                })
 
     # ── 특이 종목 파싱: "종목명(+30.00%), 종목명2(+29.92%)" 형식
     stocks = []
