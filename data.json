@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-02-24T12:06:15.543598+00:00",
-  "updated_kst": "2026-02-24 21:06 KST",
+  "updated_at": "2026-02-24T23:18:10.992738+00:00",
+  "updated_kst": "2026-02-25 08:18 KST",
   "summary": [
     "코스피 상승, 5969.64 마감, 투자 심리 개선 가능성.",
     "코스닥 1165.00 기록, 변동성 확대에 따른 주의 필요.",
@@ -173,28 +173,28 @@
       "name": "HPSP",
       "grade": "A+",
       "timeframe": "중장기",
-      "reason": "고압 어닐링 장비의 선도 공급업체, 반도체 공급망 핵심 조력자",
+      "reason": "\"2026년 반도체 미세 공정 확대의 최대 수혜\" — 소송 노이즈보다 실적 성장 가시성이 훨씬 높으며, 선단 공정(2nm 등) 도입이 가속화될수록 동사의 장비는 필수적",
       "featured": true
     },
     {
       "name": "SK하이닉스",
       "grade": "A+",
       "timeframe": "중장기",
-      "reason": "AI 성장의 직접 수혜 기업, 기술 리더십 기반의 높은 진입 장벽",
+      "reason": "\"HBM4 독주 체제와 100조 영업이익의 실현\" — 메모리 사이클의 정점이 아닌, AI 메모리라는 새로운 패러다임의 초입에 서 있으며 실적이 이를 증명",
       "featured": false
     },
     {
       "name": "한화비전",
-      "grade": "A0",
+      "grade": "A++",
       "timeframe": "중장기",
-      "reason": "거래대금 폭발 및 AI 카메라 테마 주도주",
+      "reason": "2025년 역대 최대 실적(영업이익 52% 급증)이라는 펀더멘털과 'HBM 장비(TC 본더)' 및 'AI 보안'이라는 강력한 성장 테마가 결합되어 차트 정배열 돌파",
       "featured": false
     },
     {
       "name": "온코닉테라퓨틱",
-      "grade": "B+",
-      "timeframe": "단기",
-      "reason": "제약바이오 신고가 및 상한가 돌파, 수급 집중",
+      "grade": "A0",
+      "timeframe": "중장기",
+      "reason": "신약 '자큐보'를 통해 바이오 업계에서 드문 영업이익 흑자 전환에 성공. 견고한 실적과 최근 FDA 희귀의약품 지정에 따른 강력한 모멘텀.",
       "featured": false
     },
     {
@@ -219,39 +219,39 @@
       "pos": true
     },
     "sp500": {
-      "price": 6838.0,
-      "change": -24.0,
-      "pct": -0.35,
+      "price": 6890.0,
+      "change": -19.0,
+      "pct": -0.28,
       "pos": false
     },
     "nasdaq": {
-      "price": 22627.0,
-      "change": -55.0,
-      "pct": -0.24,
+      "price": 22864.0,
+      "change": -22.0,
+      "pct": -0.1,
       "pos": false
     },
     "usdkrw": {
-      "price": 1442.5,
-      "change": -1.0,
-      "pct": -0.07,
+      "price": 1441.0,
+      "change": -2.5,
+      "pct": -0.17,
       "pos": false
     },
     "us10y": {
-      "price": 4.029,
-      "change": -0.057,
-      "pct": -1.4,
-      "pos": false
-    },
-    "wti": {
-      "price": 66.38,
-      "change": 0.07,
-      "pct": 0.11,
+      "price": 4.033,
+      "change": 0.004,
+      "pct": 0.1,
       "pos": true
     },
+    "wti": {
+      "price": 66.0,
+      "change": -0.31,
+      "pct": -0.47,
+      "pos": false
+    },
     "gold": {
-      "price": 5195.0,
-      "change": -10.0,
-      "pct": -0.19,
+      "price": 5146.0,
+      "change": -59.0,
+      "pct": -1.13,
       "pos": false
     }
   }
