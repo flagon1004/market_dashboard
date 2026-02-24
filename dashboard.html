@@ -11,7 +11,6 @@
   --bg:#0a0b0e; --surface:#111318; --surface2:#1a1d26;
   --border:#2a2d3a; --accent:#c8a96e; --accent2:#4fc3f7;
   --positive:#4caf82; --negative:#e05c5c;
-  /* 한국 주식 관례: 상승=빨강, 하락=파랑/초록 */
   --up:#e05c5c; --down:#4caf82;
   --text:#e8e6e0; --muted:#7a7f8e; --dim:#4a4f5e;
   --radius:12px; --gap:1.25rem;
@@ -54,7 +53,6 @@ header{position:sticky;top:0;z-index:100;
   display:flex;align-items:center;justify-content:center;font-size:.95rem;
   transition:all .2s;position:relative}
 .btn-ic:hover{border-color:var(--accent);color:var(--accent)}
-/* 툴팁 */
 .btn-ic .tooltip{
   display:none;position:absolute;top:calc(100% + 8px);right:0;
   background:var(--surface);border:1px solid var(--border);
@@ -67,7 +65,7 @@ header{position:sticky;top:0;z-index:100;
 .wrap{max-width:1300px;margin:0 auto;padding:1.75rem var(--gap)}
 .row{display:grid;gap:var(--gap);margin-bottom:var(--gap)}
 .r1{grid-template-columns:1fr 340px}
-.r2{grid-template-columns:1fr}  /* 섹터+종목 세로 배치 */
+.r2{grid-template-columns:1fr}
 .r3{grid-template-columns:3fr 2fr}
 @media(max-width:1000px){.r1,.r3{grid-template-columns:1fr}}
 @media(max-width:600px){.wrap{padding:1rem .75rem}}
@@ -81,11 +79,76 @@ header{position:sticky;top:0;z-index:100;
 .c1{animation-delay:.05s}.c2{animation-delay:.1s}.c3{animation-delay:.15s}
 .c4{animation-delay:.2s}.c5{animation-delay:.25s}.c6{animation-delay:.3s}
 
+/* ══════════════════════════════════════════
+   섹션 타이틀 — 가독성 개선 핵심 변경
+   ══════════════════════════════════════════ */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--border);
+  gap: .75rem;
+}
+/* 타이틀 좌측 그룹 */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  min-width: 0;
+}
+/* 아이콘 박스 */
+.sec-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.card:hover .sec-icon {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+/* 아이콘 색상 변형 — accent2(blue) */
+.sec-icon.blue {
+  background: color-mix(in srgb, var(--accent2) 12%, transparent);
+  border-color: color-mix(in srgb, var(--accent2) 28%, transparent);
+}
+/* 타이틀 텍스트 */
+.sec-title-text {
+  display: flex;
+  flex-direction: column;
+  gap: .05rem;
+}
+.sec-title-ko {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+.sec-title-en {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  line-height: 1;
+}
+/* 레거시 .lbl — header 내 배지 등에서 사용하므로 유지 */
 .lbl{font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0;
   display:flex;align-items:center;gap:.4rem}
 .lbl::before{content:'';width:4px;height:4px;background:var(--accent);
   border-radius:50%;display:inline-block;flex-shrink:0}
+/* lbl-row: 강세 배지용 */
+.lbl-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 
 /* ── INDICES ── */
 .idx-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
@@ -97,7 +160,6 @@ header{position:sticky;top:0;z-index:100;
 .idx-val{font-family:'IBM Plex Mono',monospace;font-size:1rem;
   margin:.15rem 0 .1rem;color:var(--text)}
 .idx-chg{font-family:'IBM Plex Mono',monospace;font-size:.72rem}
-/* 상승=빨강, 하락=초록 (한국 관례) */
 .up{color:var(--up)}.down{color:var(--down)}
 
 /* ── SUMMARY ── */
@@ -166,10 +228,8 @@ header{position:sticky;top:0;z-index:100;
 }
 
 /* ── MARKET STRENGTH BADGE ── */
-.lbl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem}
-.lbl-row .lbl{margin-bottom:0}
-.strength-badge{font-size:.82rem;font-weight:500;padding:.2rem .7rem;
-  border-radius:20px;border:1px solid;white-space:nowrap}
+.strength-badge{font-size:.78rem;font-weight:500;padding:.18rem .65rem;
+  border-radius:20px;border:1px solid;white-space:nowrap;flex-shrink:0}
 .strength-5{background:rgba(224,92,92,.15);color:#e05c5c;border-color:rgba(224,92,92,.4)}
 .strength-4{background:rgba(224,140,92,.15);color:#e08c5c;border-color:rgba(224,140,92,.4)}
 .strength-3{background:rgba(200,169,110,.15);color:var(--accent);border-color:rgba(200,169,110,.4)}
@@ -216,8 +276,14 @@ header{position:sticky;top:0;z-index:100;
   <!-- ROW 1: 시장 요약 + 주요 지수 -->
   <div class="row r1">
     <div class="card c1">
-      <div class="lbl-row">
-        <div class="lbl">시장 3줄 요약</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon">📋</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">시장 3줄 요약</span>
+            <span class="sec-title-en">Market Summary</span>
+          </div>
+        </div>
         <span class="strength-badge" id="strengthBadge" style="display:none"></span>
       </div>
       <ul class="sum-list" id="summaryEl">
@@ -225,7 +291,15 @@ header{position:sticky;top:0;z-index:100;
       </ul>
     </div>
     <div class="card c2">
-      <div class="lbl">주요 지수</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon blue">📊</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">주요 지수</span>
+            <span class="sec-title-en">Key Indices</span>
+          </div>
+        </div>
+      </div>
       <div class="idx-grid" id="indicesEl">
         <div class="empty" style="grid-column:span 2">로딩 중...</div>
       </div>
@@ -235,13 +309,29 @@ header{position:sticky;top:0;z-index:100;
   <!-- ROW 2: 주도 섹터 (위) + 금일 특이 종목 (아래) -->
   <div class="row r2">
     <div class="card c3">
-      <div class="lbl">주도 섹터 분석</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon">🏭</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">주도 섹터 분석</span>
+            <span class="sec-title-en">Sector Analysis</span>
+          </div>
+        </div>
+      </div>
       <div class="sec-list" id="sectorEl">
         <div class="empty">로딩 중...</div>
       </div>
     </div>
     <div class="card c4">
-      <div class="lbl">금일 특이 종목</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon">⚡</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">금일 특이 종목</span>
+            <span class="sec-title-en">Notable Stocks</span>
+          </div>
+        </div>
+      </div>
       <div class="stk-grid" id="stocksEl">
         <div class="empty">로딩 중...</div>
       </div>
@@ -251,13 +341,29 @@ header{position:sticky;top:0;z-index:100;
   <!-- ROW 3: 주요 뉴스 + 추천 종목 -->
   <div class="row r3">
     <div class="card c5">
-      <div class="lbl">주요 뉴스 요약</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon">📰</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">주요 뉴스 요약</span>
+            <span class="sec-title-en">News Digest</span>
+          </div>
+        </div>
+      </div>
       <div class="news-list" id="newsEl">
         <div class="empty">로딩 중...</div>
       </div>
     </div>
     <div class="card c6">
-      <div class="lbl">추천 투자 종목</div>
+      <div class="section-header">
+        <div class="section-title">
+          <div class="sec-icon">🎯</div>
+          <div class="sec-title-text">
+            <span class="sec-title-ko">추천 투자 종목</span>
+            <span class="sec-title-en">Top Picks</span>
+          </div>
+        </div>
+      </div>
       <div class="rec-grid" id="recEl">
         <div class="empty" style="grid-column:span 2">로딩 중...</div>
       </div>
@@ -268,7 +374,6 @@ header{position:sticky;top:0;z-index:100;
 </div>
 
 <script>
-// ── 테마
 function toggleTheme(){
   const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', t);
@@ -277,17 +382,13 @@ function toggleTheme(){
 const st = localStorage.getItem('theme');
 if(st) document.documentElement.setAttribute('data-theme', st);
 
-// ── 색상: 상승=빨강(up), 하락=초록(down) — 한국 주식 관례
 function updown(pos){ return pos ? 'up' : 'down'; }
 function arrow(pos){ return pos ? '▲' : '▼'; }
-
-// ── 숫자 포맷
 function fmt(n, dec=2){
   if(n===undefined||n===null||isNaN(n)) return '—';
   return Number(n).toLocaleString('ko-KR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 }
 
-// ── 렌더러
 function renderIndices(idx){
   if(!idx){ document.getElementById('indicesEl').innerHTML='<div class="empty" style="grid-column:span 2">지수 데이터 없음</div>'; return; }
   const MAP=[
@@ -313,8 +414,6 @@ function renderIndices(idx){
 function renderStrength(val){
   const badge = document.getElementById('strengthBadge');
   if(!val){ badge.style.display='none'; return; }
-
-  // 별 개수로 강도 파악 (3단계)
   const stars = (val.match(/★/g)||[]).length;
   const MAP = {
     3: {cls:'strength-5', emoji:'🔴', label:'강세'},
@@ -407,7 +506,6 @@ function renderRec(arr){
     '* 본 추천은 정보 제공 목적이며 투자 판단의 최종 책임은 투자자 본인에게 있습니다.';
 }
 
-// ── 데이터 로드
 async function loadData(){
   const dot=document.getElementById('syncDot');
   const txt=document.getElementById('syncTxt');
