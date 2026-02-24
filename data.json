@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-02-24T11:18:12.486712+00:00",
-  "updated_kst": "2026-02-24 20:18 KST",
+  "updated_at": "2026-02-24T12:06:15.543598+00:00",
+  "updated_kst": "2026-02-24 21:06 KST",
   "summary": [
     "코스피 상승, 5969.64 마감, 투자 심리 개선 가능성.",
     "코스닥 1165.00 기록, 변동성 확대에 따른 주의 필요.",
@@ -231,9 +231,9 @@
       "pos": false
     },
     "usdkrw": {
-      "price": 1442.8,
-      "change": -0.7,
-      "pct": -0.05,
+      "price": 1442.5,
+      "change": -1.0,
+      "pct": -0.07,
       "pos": false
     },
     "us10y": {
@@ -243,15 +243,15 @@
       "pos": false
     },
     "wti": {
-      "price": 66.26,
-      "change": -0.05,
-      "pct": -0.08,
-      "pos": false
+      "price": 66.38,
+      "change": 0.07,
+      "pct": 0.11,
+      "pos": true
     },
     "gold": {
-      "price": 5193.0,
-      "change": -12.0,
-      "pct": -0.23,
+      "price": 5195.0,
+      "change": -10.0,
+      "pct": -0.19,
       "pos": false
     }
   }
