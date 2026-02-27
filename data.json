@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-02-27T10:24:29.150507+00:00",
-  "updated_kst": "2026-02-27 19:24 KST",
+  "updated_at": "2026-02-27T11:29:48.515207+00:00",
+  "updated_kst": "2026-02-27 20:29 KST",
   "summary": [
     "코스피 상승, 6200선 돌파 기대감 고조, 추가 상승 여력 주목.",
     "코스닥 강세, 1200선 근접, 기술주 중심 투자 심리 개선 분석.",
@@ -182,27 +182,27 @@
   "indices": {
     "kospi": {
       "price": 6244.0,
-      "change": 160.0,
-      "pct": 2.63,
-      "pos": true
+      "change": -63.0,
+      "pct": -1.0,
+      "pos": false
     },
     "kosdaq": {
       "price": 1193.0,
-      "change": 28.0,
-      "pct": 2.36,
+      "change": 5.0,
+      "pct": 0.39,
       "pos": true
     },
     "sp500": {
       "price": 6909.0,
-      "change": 19.0,
-      "pct": 0.27,
-      "pos": true
+      "change": -37.0,
+      "pct": -0.54,
+      "pos": false
     },
     "nasdaq": {
       "price": 22878.0,
-      "change": 15.0,
-      "pct": 0.06,
-      "pos": true
+      "change": -274.0,
+      "pct": -1.18,
+      "pos": false
     },
     "usdkrw": {
       "price": 1440.0,
@@ -217,15 +217,15 @@
       "pos": false
     },
     "wti": {
-      "price": 66.45,
-      "change": 1.24,
-      "pct": 1.9,
+      "price": 66.57,
+      "change": 1.36,
+      "pct": 2.09,
       "pos": true
     },
     "gold": {
       "price": 5190.0,
-      "change": 13.0,
-      "pct": 0.25,
+      "change": 14.0,
+      "pct": 0.26,
       "pos": true
     }
   }
