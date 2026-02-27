@@ -418,14 +418,25 @@ def fetch_notion():
 def fetch_yahoo(symbol, dec=2):
     url = (
         f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
-        f"?interval=1d&range=2d"
+        f"?interval=1d&range=5d"  # 5일치로 확장 → 주말/공휴일 포함해도 정확한 전일 종가 확보
     )
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as r:
-            meta = json.loads(r.read().decode())["chart"]["result"][0]["meta"]
+            data = json.loads(r.read().decode())["chart"]["result"][0]
+
+        meta   = data["meta"]
         price  = meta.get("regularMarketPrice", 0)
-        prev   = meta.get("chartPreviousClose") or meta.get("previousClose") or price
+
+        # 종가 배열에서 직전 거래일 종가 추출 (주말/공휴일 오류 방지)
+        closes = data.get("indicators", {}).get("quote", [{}])[0].get("close", [])
+        closes = [c for c in closes if c is not None]  # None 제거
+
+        if len(closes) >= 2:
+            prev = closes[-2]   # 직전 거래일 종가
+        else:
+            prev = meta.get("chartPreviousClose") or meta.get("previousClose") or price
+
         change = price - prev
         pct    = (change / prev * 100) if prev else 0
         return {
