@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-03-03T09:24:52.205909+00:00",
-  "updated_kst": "2026-03-03 18:24 KST",
+  "updated_at": "2026-03-03T10:25:54.536301+00:00",
+  "updated_kst": "2026-03-03 19:25 KST",
   "summary": [
     "코스피 급락, 7%대 하락폭 기록, 투자 심리 위축 심화됨.",
     "코스닥 또한 급락세, 4%대 하락, 변동성 확대 우려됨.",
@@ -106,9 +106,9 @@
       "pos": true
     },
     "usdkrw": {
-      "price": 1474.4,
-      "change": 35.9,
-      "pct": 2.5,
+      "price": 1479.0,
+      "change": 40.5,
+      "pct": 2.81,
       "pos": true
     },
     "us10y": {
@@ -118,16 +118,16 @@
       "pos": true
     },
     "wti": {
-      "price": 74.97,
-      "change": 3.74,
-      "pct": 5.25,
+      "price": 75.62,
+      "change": 4.39,
+      "pct": 6.16,
       "pos": true
     },
     "gold": {
-      "price": 5309.0,
-      "change": 14.0,
-      "pct": 0.27,
-      "pos": true
+      "price": 5285.0,
+      "change": -9.0,
+      "pct": -0.18,
+      "pos": false
     }
   }
 }
