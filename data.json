@@ -1,59 +1,132 @@
 {
-  "updated_at": "2026-03-02T10:32:08.535336+00:00",
-  "updated_kst": "2026-03-02 19:32 KST",
-  "summary": [],
-  "market_strength": "",
+  "updated_at": "2026-03-03T09:24:52.205909+00:00",
+  "updated_kst": "2026-03-03 18:24 KST",
+  "summary": [
+    "코스피 급락, 7%대 하락폭 기록, 투자 심리 위축 심화됨.",
+    "코스닥 또한 급락세, 4%대 하락, 변동성 확대 우려됨.",
+    "개인 투자자, 시장 상황 예의주시, 신중한 투자 전략 필요함."
+  ],
+  "market_strength": "★",
   "sectors": [],
   "stocks": [],
-  "news": [],
-  "recommendations": [],
+  "news": [
+    {
+      "time": "",
+      "headline": "## 직장인 투자자가 꼭 알아야 할 핵심 뉴스 3가지",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "[뉴스 1]",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "제목: [서환-마감] 중동 전쟁에 외인 주식 투매까지…26.40원↑",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "영향 및 시사점: 중동 전쟁으로 안전자산 선호 심리가 강해지면서 원/달러 환율이 급등했고, 외국인 투자자들의 주식 매도세가 거세졌으므로 당분간 환율 변동성에 주의하고, 외인 매도세 지속 여부를 주시해야 합니다.",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "[뉴스 2]",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "제목: 외국인, 삼전닉스 4.4조 '매도 폭격'… 방산·정유株는 급등",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "영향 및 시사점: 외국인 투자자들이 국내 주식을 대규모로 팔면서 코스피 시가총액 상위 종목들이 하락했지만, 전쟁 관련주인 방산주와 유가 상승 수혜주인 정유주는 급등했으므로, 투자 포트폴리오를 점검하고 리스크 관리에 신경써야 합니다.",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "[뉴스 3]",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "제목: 유가에 환율까지 '비상'…장기전 땐 성장률 '1%대'",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "영향 및 시사점: 중동 전쟁이 장기화될 경우 유가 급등과 환율 상승으로 인해 한국 경제 성장률이 크게 둔화될 수 있다는 전망이 나왔으므로, 거시경제 상황 변화에 따른 투자 전략 수정이 필요할 수 있습니다.",
+      "summary": "",
+      "tag": ""
+    }
+  ],
+  "recommendations": [
+    {
+      "name": "LIG넥스원",
+      "grade": "A0",
+      "timeframe": "단기",
+      "reason": "실적(26조 수주)이 받쳐주는 가운데 터진 지정학적 모멘텀\n단기 뉴스에 의한 상한가는 차익 실현 매물을 동반할 변동성 주의",
+      "featured": true
+    }
+  ],
   "indices": {
     "kospi": {
-      "price": 6244.0,
-      "change": -63.0,
-      "pct": -1.0,
+      "price": 5792.0,
+      "change": -452.0,
+      "pct": -7.24,
       "pos": false
     },
     "kosdaq": {
-      "price": 1193.0,
-      "change": 5.0,
-      "pct": 0.39,
-      "pos": true
+      "price": 1138.0,
+      "change": -55.0,
+      "pct": -4.62,
+      "pos": false
     },
     "sp500": {
-      "price": 6879.0,
-      "change": -30.0,
-      "pct": -0.43,
-      "pos": false
+      "price": 6882.0,
+      "change": 3.0,
+      "pct": 0.04,
+      "pos": true
     },
     "nasdaq": {
-      "price": 22668.0,
-      "change": -210.0,
-      "pct": -0.92,
-      "pos": false
+      "price": 22749.0,
+      "change": 81.0,
+      "pct": 0.36,
+      "pos": true
     },
     "usdkrw": {
-      "price": 1457.0,
-      "change": 24.7,
-      "pct": 1.72,
+      "price": 1474.4,
+      "change": 35.9,
+      "pct": 2.5,
       "pos": true
     },
     "us10y": {
-      "price": 3.962,
-      "change": -0.055,
-      "pct": -1.37,
-      "pos": false
+      "price": 4.048,
+      "change": 0.086,
+      "pct": 2.17,
+      "pos": true
     },
     "wti": {
-      "price": 71.95,
-      "change": 4.93,
-      "pct": 7.36,
+      "price": 74.97,
+      "change": 3.74,
+      "pct": 5.25,
       "pos": true
     },
     "gold": {
-      "price": 5406.0,
-      "change": 175.0,
-      "pct": 3.35,
+      "price": 5309.0,
+      "change": 14.0,
+      "pct": 0.27,
       "pos": true
     }
   }
