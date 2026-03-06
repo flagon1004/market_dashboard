@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-03-06T09:08:34.883307+00:00",
-  "updated_kst": "2026-03-06 18:08 KST",
+  "updated_at": "2026-03-06T10:21:32.424753+00:00",
+  "updated_kst": "2026-03-06 19:21 KST",
   "summary": [
     "코스피 보합 마감, 소폭 상승 제한적 흐름.",
     "코스닥 급등, 개인 투자심리 회복 가능성 시사.",
@@ -205,9 +205,9 @@
       "pos": false
     },
     "usdkrw": {
-      "price": 1475.8,
-      "change": 15.1,
-      "pct": 1.03,
+      "price": 1485.0,
+      "change": 24.2,
+      "pct": 1.66,
       "pos": true
     },
     "us10y": {
@@ -217,15 +217,15 @@
       "pos": true
     },
     "wti": {
-      "price": 81.49,
-      "change": 0.48,
-      "pct": 0.59,
+      "price": 83.86,
+      "change": 2.85,
+      "pct": 3.52,
       "pos": true
     },
     "gold": {
-      "price": 5116.0,
-      "change": 51.0,
-      "pct": 1.01,
+      "price": 5095.0,
+      "change": 29.0,
+      "pct": 0.58,
       "pos": true
     }
   }
