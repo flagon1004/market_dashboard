@@ -79,75 +79,28 @@ header{position:sticky;top:0;z-index:100;
 .c1{animation-delay:.05s}.c2{animation-delay:.1s}.c3{animation-delay:.15s}
 .c4{animation-delay:.2s}.c5{animation-delay:.25s}.c6{animation-delay:.3s}
 
-/* ══════════════════════════════════════════
-   섹션 타이틀 — 가독성 개선 핵심 변경
-   ══════════════════════════════════════════ */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.1rem;
-  padding-bottom: .75rem;
-  border-bottom: 1px solid var(--border);
-  gap: .75rem;
-}
-/* 타이틀 좌측 그룹 */
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  min-width: 0;
-}
-/* 아이콘 박스 */
-.sec-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .85rem;
-  flex-shrink: 0;
-  transition: background .2s;
-}
-.card:hover .sec-icon {
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-}
-/* 아이콘 색상 변형 — accent2(blue) */
-.sec-icon.blue {
-  background: color-mix(in srgb, var(--accent2) 12%, transparent);
-  border-color: color-mix(in srgb, var(--accent2) 28%, transparent);
-}
-/* 타이틀 텍스트 */
-.sec-title-text {
-  display: flex;
-  flex-direction: column;
-  gap: .05rem;
-}
-.sec-title-ko {
-  font-size: .88rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -.01em;
-  line-height: 1.2;
-}
-.sec-title-en {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .58rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--dim);
-  line-height: 1;
-}
-/* 레거시 .lbl — header 내 배지 등에서 사용하므로 유지 */
+/* ── SECTION HEADER ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);gap:.75rem}
+.section-title{display:flex;align-items:center;gap:.6rem;min-width:0}
+.sec-icon{width:28px;height:28px;border-radius:7px;
+  background:color-mix(in srgb,var(--accent) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  flex-shrink:0;transition:background .2s}
+.card:hover .sec-icon{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.sec-icon.blue{background:color-mix(in srgb,var(--accent2) 12%,transparent);
+  border-color:color-mix(in srgb,var(--accent2) 28%,transparent)}
+.sec-title-text{display:flex;flex-direction:column;gap:.05rem}
+.sec-title-ko{font-size:.88rem;font-weight:700;color:var(--text);
+  letter-spacing:-.01em;line-height:1.2}
+.sec-title-en{font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim);line-height:1}
 .lbl{font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.15em;
   text-transform:uppercase;color:var(--accent);margin-bottom:0;
   display:flex;align-items:center;gap:.4rem}
 .lbl::before{content:'';width:4px;height:4px;background:var(--accent);
   border-radius:50%;display:inline-block;flex-shrink:0}
-/* lbl-row: 강세 배지용 */
 .lbl-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 
 /* ── INDICES ── */
@@ -266,7 +219,7 @@ header{position:sticky;top:0;z-index:100;
       <span class="tooltip">인쇄 또는 PDF 저장</span>
     </button>
     <button class="btn-ic" onclick="loadData()" title="새로고침">↻
-      <span class="tooltip">주요 지수만 리프레시 됩니다.<br>노션 데이터는 매일 오전 8시<br>자동 업데이트됩니다.</span>
+      <span class="tooltip">주요 지수만 리프레시 됩니다.<br>노션 데이터는 매일 자동<br>업데이트됩니다.</span>
     </button>
   </div>
 </header>
@@ -475,8 +428,17 @@ function renderNews(arr){
 function renderRec(arr){
   const el=document.getElementById('recEl');
   if(!arr?.length){ el.innerHTML='<div class="empty" style="grid-column:span 2">추천 종목 데이터 없음</div>'; return; }
-  el.innerHTML=arr.map((r,i)=>{
-    const featured=r.featured||i===0;
+
+  // ── 추천등급 순위: A++ > A+ > A0 > B+ > B (낮을수록 높은 등급)
+  const GRADE_RANK = {'A++':1, 'A+':2, 'A0':3, 'B+':4, 'B':5};
+  const sorted = [...arr].sort((a, b) => {
+    const ra = GRADE_RANK[a.grade] ?? 99;
+    const rb = GRADE_RANK[b.grade] ?? 99;
+    return ra - rb;
+  });
+
+  el.innerHTML=sorted.map((r,i)=>{
+    const featured = i===0;  // 가장 높은 등급이 자동으로 TOP PICK
     if(featured){
       return `<div class="rec-card featured">
         <div>
