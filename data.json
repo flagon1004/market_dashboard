@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-03-18T10:06:12.593348+00:00",
-  "updated_kst": "2026-03-18 19:06 KST",
+  "updated_at": "2026-03-18T10:37:22.694140+00:00",
+  "updated_kst": "2026-03-18 19:37 KST",
   "summary": [
     "코스피 급등, 5% 이상 상승 마감함",
     "코스닥 또한 상승, 2%대 상승세 기록함",
@@ -214,9 +214,9 @@
       "pos": false
     },
     "usdkrw": {
-      "price": 1488.3,
-      "change": -0.6,
-      "pct": -0.04,
+      "price": 1488.8,
+      "change": -0.1,
+      "pct": -0.0,
       "pos": false
     },
     "us10y": {
@@ -226,15 +226,15 @@
       "pos": false
     },
     "wti": {
-      "price": 94.45,
-      "change": -1.76,
-      "pct": -1.83,
+      "price": 94.25,
+      "change": -1.96,
+      "pct": -2.04,
       "pos": false
     },
     "gold": {
-      "price": 4997.0,
-      "change": -4.0,
-      "pct": -0.09,
+      "price": 4991.0,
+      "change": -10.0,
+      "pct": -0.21,
       "pos": false
     }
   }
