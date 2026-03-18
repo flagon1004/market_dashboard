@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-03-18T09:13:29.079167+00:00",
-  "updated_kst": "2026-03-18 18:13 KST",
+  "updated_at": "2026-03-18T10:06:12.593348+00:00",
+  "updated_kst": "2026-03-18 19:06 KST",
   "summary": [
     "코스피 급등, 5% 이상 상승 마감함",
     "코스닥 또한 상승, 2%대 상승세 기록함",
@@ -161,28 +161,28 @@
   "recommendations": [
     {
       "name": "현대건설",
-      "grade": "B",
+      "grade": "B+",
       "timeframe": "중장기",
       "reason": "대형 원전 및 SMR(소형모듈원자로) 수주를 통한 에너지 플랫폼 기업 전환",
       "featured": true
     },
     {
       "name": "HD현대일렉트릭",
-      "grade": "B",
+      "grade": "A+",
       "timeframe": "중장기",
       "reason": "북미 초고압 변압기 교체 수요의 최대 수혜 및 역대급 영업이익 달성",
       "featured": false
     },
     {
       "name": "산일전기",
-      "grade": "B",
+      "grade": "B0",
       "timeframe": "단기",
       "reason": "AI 데이터센터향 특수변압기 특화 및 업종 내 최상위권 영업이익률",
       "featured": false
     },
     {
       "name": "효성중공업",
-      "grade": "B",
+      "grade": "A+",
       "timeframe": "중장기",
       "reason": "글로벌 변압기 공급 부족 심화 및 데이터센터향 고부가 수주 확대",
       "featured": false
@@ -214,9 +214,9 @@
       "pos": false
     },
     "usdkrw": {
-      "price": 1487.0,
-      "change": -2.0,
-      "pct": -0.13,
+      "price": 1488.3,
+      "change": -0.6,
+      "pct": -0.04,
       "pos": false
     },
     "us10y": {
@@ -226,15 +226,15 @@
       "pos": false
     },
     "wti": {
-      "price": 94.1,
-      "change": -2.11,
-      "pct": -2.19,
+      "price": 94.45,
+      "change": -1.76,
+      "pct": -1.83,
       "pos": false
     },
     "gold": {
-      "price": 4992.0,
-      "change": -9.0,
-      "pct": -0.17,
+      "price": 4997.0,
+      "change": -4.0,
+      "pct": -0.09,
       "pos": false
     }
   }
