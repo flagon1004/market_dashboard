@@ -1,170 +1,221 @@
 {
-  "updated_at": "2026-04-08T10:45:00.276922+00:00",
-  "updated_kst": "2026-04-08 19:45 KST",
+  "updated_at": "2026-04-09T10:49:56.108247+00:00",
+  "updated_kst": "2026-04-09 19:49 KST",
   "summary": [
-    "미 연준 금리 동결 시사에 코스피·나스닥 동반 상승. 외국인 순매수 전환이 지수 방어에 기여했다.",
-    "AI 반도체 섹터 급등. 엔비디아 실적 서프라이즈로 SK하이닉스·삼성전자 HBM 관련주 강세.",
-    "원/달러 환율 1,310원대 안정. 수출주 밸류에이션 개선 기대감이 코스피 안착을 이끌었다."
+    "코스피, 코스닥 동반 하락세 심화, 투자 심리 위축",
+    "미국 금리 인상 우려 지속, 외국인 매도세 증가",
+    "변동성 확대, 투자 전략 재점검 필요 시점"
   ],
-  "market_strength": "강세",
+  "market_strength": "★",
   "sectors": [
     {
-      "name": "반도체",
-      "change": "+3.42%",
-      "value": 3.42
+      "name": "정치 테마 (총선 관련주)",
+      "change": "퍼스텍은 과거 특정 정치인과 관련되어 정치 테마주로 분류되어 있으며, 총선이 다가옴에 따라 기대감에 상승한 것으로 보입니다. 부국철강 역시 정치 테마주로 엮이면서 투자자들의 관심이 쏠린 것으로 예상됩니다.",
+      "value": 0
     },
     {
-      "name": "AI·소프트웨어",
-      "change": "+2.81%",
-      "value": 2.81
+      "name": "전기차/반도체 테마",
+      "change": "광전자, 빛과전자, 디이엔티, 후성은 전기차 충전 관련 사업을 영위하거나, 반도체 관련 장비 및 소재를 생산하는 기업입니다. 최근 전기차 시장 성장 기대감과 반도체 업황 회복 기대감이 반영되어 상승한 것으로 분석됩니다. 특히, 디이엔티는 OLED 장비 테마로도 엮여있어 추가적인 상승 동력이 발생했을 수 있습니다.",
+      "value": 0
     },
     {
-      "name": "2차전지",
-      "change": "+2.20%",
-      "value": 2.2
+      "name": "화장품 테마",
+      "change": "오가닉티코스메틱은 중국 소비 회복 기대감에 따른 화장품 업종 전반의 투자 심리 개선으로 상승한 것으로 보입니다.",
+      "value": 0
     },
     {
-      "name": "바이오",
-      "change": "+1.58%",
-      "value": 1.58
+      "name": "통신장비 테마",
+      "change": "머큐리는 통신 장비 관련주로, 5G 투자 확대 기대감에 영향을 받아 상승한 것으로 예상됩니다.",
+      "value": 0
     },
     {
-      "name": "금융",
-      "change": "-0.84%",
-      "value": -0.84
-    },
-    {
-      "name": "건설·부동산",
-      "change": "-1.43%",
-      "value": -1.43
+      "name": "디스플레이 테마",
+      "change": "위지트는 반도체 및 디스플레이 관련 기업으로, 디스플레이 업황 회복 기대감에 상승한 것으로 보입니다.",
+      "value": 0
     }
   ],
   "stocks": [
     {
-      "name": "SK하이닉스",
-      "reason": "HBM3E 양산 확대",
-      "price": "185,400",
-      "change": "+5.23%",
+      "name": "광전자",
+      "reason": "",
+      "price": "",
+      "change": "+30.00%",
       "pos": true
     },
     {
-      "name": "한미반도체",
-      "reason": "TC본더 수주 체결",
-      "price": "94,800",
-      "change": "+8.71%",
+      "name": "빛과전자",
+      "reason": "",
+      "price": "",
+      "change": "+30.00%",
       "pos": true
     },
     {
-      "name": "삼성SDI",
-      "reason": "유럽 수요 둔화",
-      "price": "312,000",
-      "change": "-3.12%",
-      "pos": false
+      "name": "퍼스텍",
+      "reason": "",
+      "price": "",
+      "change": "+29.92%",
+      "pos": true
     },
     {
-      "name": "카카오페이",
-      "reason": "해외결제 서비스 확대",
-      "price": "24,650",
-      "change": "+4.46%",
+      "name": "부국철강",
+      "reason": "",
+      "price": "",
+      "change": "+29.85%",
+      "pos": true
+    },
+    {
+      "name": "앱튼",
+      "reason": "",
+      "price": "",
+      "change": "+29.66%",
+      "pos": true
+    },
+    {
+      "name": "오가닉티코스메틱",
+      "reason": "",
+      "price": "",
+      "change": "+29.13%",
+      "pos": true
+    },
+    {
+      "name": "디이엔티",
+      "reason": "",
+      "price": "",
+      "change": "+24.60%",
+      "pos": true
+    },
+    {
+      "name": "머큐리",
+      "reason": "",
+      "price": "",
+      "change": "+19.08%",
+      "pos": true
+    },
+    {
+      "name": "위지트",
+      "reason": "",
+      "price": "",
+      "change": "+19.07%",
+      "pos": true
+    },
+    {
+      "name": "후성",
+      "reason": "",
+      "price": "",
+      "change": "+15.76%",
       "pos": true
     }
   ],
   "news": [
     {
-      "time": "09:02",
-      "headline": "연준 1월 의사록 — 금리인하 서두를 필요 없다 기조 재확인",
+      "time": "",
+      "headline": "직장인 투자자가 꼭 알아야 할 핵심 뉴스 3가지:",
       "summary": "",
-      "tag": "통화정책"
+      "tag": ""
     },
     {
-      "time": "10:15",
-      "headline": "엔비디아 블랙웰 GPU 공급난 — 국내 HBM 기업 반사이익 기대",
+      "time": "",
+      "headline": "[뉴스 1]",
       "summary": "",
-      "tag": "반도체"
+      "tag": ""
     },
     {
-      "time": "11:33",
-      "headline": "정부 밸류업 2차 프로그램 발표 — 자사주 소각 의무화 논의",
+      "time": "",
+      "headline": "제목: KODEX 200, ETF 첫 순자산 20조 돌파",
       "summary": "",
-      "tag": "정책"
+      "tag": ""
     },
     {
-      "time": "13:47",
-      "headline": "BYD 국내 출시 재연기 — 국산 완성차·배터리주 단기 수혜",
+      "time": "",
+      "headline": "영향 및 시사점: KODEX 200 ETF의 순자산 20조 돌파는 국내 증시에 대한 투자자들의 신뢰가 회복되고 있다는 신호이며, 한국 경제 성장성에 대한 긍정적인 전망을 반영합니다.",
       "summary": "",
-      "tag": "자동차"
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "[뉴스 2]",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "제목: 금융지주, 작년 당기순이익 26조7000억원…역대 '최대'",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "영향 및 시사점: 금융지주들의 역대 최대 실적은 증시 활황 덕분이지만, 향후 경제 여건 악화에 대비해야 하며, 투자자들은 금융지주의 건전성 관리에 주목해야 합니다.",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "[뉴스 3]",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "제목: [마감시황] 코스피, 휴전에도 하락 마감…5800선 내줘",
+      "summary": "",
+      "tag": ""
+    },
+    {
+      "time": "",
+      "headline": "영향 및 시사점: 미국-이란 휴전에도 불구하고 코스피가 하락 마감한 것은 지정학적 불확실성이 여전하며, 투자 심리가 위축되어 있다는 것을 보여줍니다. 투자 시 신중한 접근이 필요합니다.",
+      "summary": "",
+      "tag": ""
     }
   ],
-  "recommendations": [
-    {
-      "name": "삼성전자",
-      "grade": "A+",
-      "timeframe": "중기",
-      "reason": "HBM 전환 가속 및 파운드리 수주 회복 사이클 진입. 저점 분할매수 구간.",
-      "featured": true
-    },
-    {
-      "name": "SK하이닉스",
-      "grade": "A",
-      "timeframe": "단기",
-      "reason": "HBM3E 독점 공급 지위 유지. 고수익성 구조 지속.",
-      "featured": false
-    },
-    {
-      "name": "NAVER",
-      "grade": "B+",
-      "timeframe": "장기",
-      "reason": "HyperCLOVA X B2B 전환 가속. AI 수익화 초입 구간.",
-      "featured": false
-    }
-  ],
+  "recommendations": [],
   "indices": {
     "kospi": {
-      "price": 5872.0,
-      "change": 378.0,
-      "pct": 6.87,
-      "pos": true
+      "price": 5778.0,
+      "change": -94.0,
+      "pct": -1.61,
+      "pos": false
     },
     "kosdaq": {
-      "price": 1090.0,
-      "change": 53.0,
-      "pct": 5.12,
-      "pos": true
+      "price": 1076.0,
+      "change": -14.0,
+      "pct": -1.27,
+      "pos": false
     },
     "sp500": {
-      "price": 6617.0,
-      "change": 5.0,
-      "pct": 0.08,
+      "price": 6783.0,
+      "change": 166.0,
+      "pct": 2.51,
       "pos": true
     },
     "nasdaq": {
-      "price": 22018.0,
-      "change": 22.0,
-      "pct": 0.1,
+      "price": 22635.0,
+      "change": 617.0,
+      "pct": 2.8,
       "pos": true
     },
     "usdkrw": {
-      "price": 1477.7,
-      "change": -30.1,
-      "pct": -2.0,
+      "price": 1480.5,
+      "change": -18.7,
+      "pct": -1.24,
       "pos": false
     },
     "us10y": {
-      "price": 4.343,
-      "change": 0.008,
-      "pct": 0.18,
-      "pos": true
-    },
-    "wti": {
-      "price": 94.57,
-      "change": -18.38,
-      "pct": -16.27,
+      "price": 4.291,
+      "change": -0.052,
+      "pct": -1.2,
       "pos": false
     },
+    "wti": {
+      "price": 99.05,
+      "change": 4.64,
+      "pct": 4.91,
+      "pos": true
+    },
     "gold": {
-      "price": 4809.0,
-      "change": 152.0,
-      "pct": 3.26,
+      "price": 4765.0,
+      "change": 15.0,
+      "pct": 0.32,
       "pos": true
     }
   }
