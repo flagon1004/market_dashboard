@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-04-29T11:20:08.749519+00:00",
-  "updated_kst": "2026-04-29 20:20 KST",
+  "updated_at": "2026-04-30T11:20:21.751172+00:00",
+  "updated_kst": "2026-04-30 20:20 KST",
   "summary": [
     "미 연준 금리 동결 시사에 코스피·나스닥 동반 상승. 외국인 순매수 전환이 지수 방어에 기여했다.",
     "AI 반도체 섹터 급등. 엔비디아 실적 서프라이즈로 SK하이닉스·삼성전자 HBM 관련주 강세.",
@@ -120,52 +120,52 @@
   ],
   "indices": {
     "kospi": {
-      "price": 6691.0,
-      "change": 50.0,
-      "pct": 0.75,
-      "pos": true
+      "price": 6599.0,
+      "change": -92.0,
+      "pct": -1.38,
+      "pos": false
     },
     "kosdaq": {
-      "price": 1220.0,
-      "change": 5.0,
-      "pct": 0.39,
-      "pos": true
+      "price": 1192.0,
+      "change": -28.0,
+      "pct": -2.29,
+      "pos": false
     },
     "sp500": {
-      "price": 7139.0,
-      "change": -35.0,
-      "pct": -0.49,
+      "price": 7136.0,
+      "change": -3.0,
+      "pct": -0.04,
       "pos": false
     },
     "nasdaq": {
-      "price": 24664.0,
-      "change": -223.0,
-      "pct": -0.9,
-      "pos": false
+      "price": 24673.0,
+      "change": 9.0,
+      "pct": 0.04,
+      "pos": true
     },
     "usdkrw": {
-      "price": 1478.7,
-      "change": 5.7,
-      "pct": 0.38,
+      "price": 1473.1,
+      "change": 1.1,
+      "pct": 0.08,
       "pos": true
     },
     "us10y": {
-      "price": 4.354,
-      "change": 0.018,
-      "pct": 0.42,
+      "price": 4.418,
+      "change": 0.064,
+      "pct": 1.47,
       "pos": true
     },
     "wti": {
-      "price": 103.25,
-      "change": 3.32,
-      "pct": 3.32,
-      "pos": true
+      "price": 105.55,
+      "change": -1.33,
+      "pct": -1.24,
+      "pos": false
     },
     "gold": {
-      "price": 4580.0,
-      "change": -11.0,
-      "pct": -0.25,
-      "pos": false
+      "price": 4656.0,
+      "change": 111.0,
+      "pct": 2.44,
+      "pos": true
     }
   }
 }
